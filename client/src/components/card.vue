@@ -1,35 +1,33 @@
 <template>
   <div class="container">
-    <div class="row">
-      <div class="col-sm-12 col-md-4 col-lg-4 col-xl-3">
+    <div class="row mt-5">
+      <div
+        class="col-sm-12 col-md-4 col-lg-4 col-xl-4 mb-4"
+        v-for="item in items"
+        :key="item._id"
+      >
         <div class="card">
           <div class="d-flex position-relative">
-            <img
-              src="https://static.remove.bg/remove-bg-web/2a274ebbb5879d870a69caae33d94388a88e0e35/assets/start-0e837dcc57769db2306d8d659f53555feb500b3c5d456879b9c843d1872e7baa.jpg"
-              class="flex-shrink-0 me-3"
-              alt="..."
-            />
+            <img :src="item.topImage" class="flex-shrink-0 me-3" alt="..." />
             <div>
-              <h5 class="">Custom component</h5>
-              <p class="name">mumbai, india</p>
+              <h5 class="">{{ item.name }}</h5>
+              <p class="name">{{ item.add }}</p>
             </div>
           </div>
-          <img
-            src="https://static.remove.bg/remove-bg-web/2a274ebbb5879d870a69caae33d94388a88e0e35/assets/start-0e837dcc57769db2306d8d659f53555feb500b3c5d456879b9c843d1872e7baa.jpg"
-            class="card-img-top"
-            alt="..."
-          />
+          <img :src="item.pic" class="card-img-top" alt="..." />
           <div class="icons">
             <i class="fas fa-heart"></i>
             <i class="fas fa-comment"></i>
             <i class="fab fa-telegram-plane"></i>
           </div>
           <div class="card-body">
-            <span class="card-title">liked by <b>aremu and 20 others</b> </span>
+            <span class="card-title"
+              >liked by <b>{{ item.liked }}and {{ item.total }} others</b>
+            </span>
             <blockquote class="card-text">
-              <q> Some quick example text to</q>
+              <q> {{ item.title }}</q>
               <br />
-              <small class="text-muted">Last updated 3 mins ago</small>
+              <small class="text-muted">{{ item.updated }}</small>
             </blockquote>
           </div>
         </div>
@@ -37,6 +35,66 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      items: [
+        {
+          topImage:
+            "https://static.remove.bg/remove-bg-web/2a274ebbb5879d870a69caae33d94388a88e0e35/assets/start-0e837dcc57769db2306d8d659f53555feb500b3c5d456879b9c843d1872e7baa.jpg",
+          name: "Custom component",
+          add: "mumbai, india",
+          pic:
+            "https://static.remove.bg/remove-bg-web/2a274ebbb5879d870a69caae33d94388a88e0e35/assets/start-0e837dcc57769db2306d8d659f53555feb500b3c5d456879b9c843d1872e7baa.jpg",
+          title: "Some quick example text to",
+          updated: "3 weeks ago",
+          liked: "aremu",
+          total: "30999",
+        },
+        {
+          topImage:
+            "https://static.remove.bg/remove-bg-web/2a274ebbb5879d870a69caae33d94388a88e0e35/assets/start-0e837dcc57769db2306d8d659f53555feb500b3c5d456879b9c843d1872e7baa.jpg",
+          name: "Custom component",
+          add: "mumbai, india",
+          pic:
+            "https://static.remove.bg/remove-bg-web/2a274ebbb5879d870a69caae33d94388a88e0e35/assets/start-0e837dcc57769db2306d8d659f53555feb500b3c5d456879b9c843d1872e7baa.jpg",
+          title: "Some quick example text to",
+          updated: "3 weeks ago",
+          liked: "aremu",
+          total: "30999",
+        },
+        {
+          topImage:
+            "https://static.remove.bg/remove-bg-web/2a274ebbb5879d870a69caae33d94388a88e0e35/assets/start-0e837dcc57769db2306d8d659f53555feb500b3c5d456879b9c843d1872e7baa.jpg",
+          name: "Custom component",
+          add: "mumbai, india",
+          pic:
+            "https://static.remove.bg/remove-bg-web/2a274ebbb5879d870a69caae33d94388a88e0e35/assets/start-0e837dcc57769db2306d8d659f53555feb500b3c5d456879b9c843d1872e7baa.jpg",
+          title: "Some quick example text to",
+          updated: "3 weeks ago",
+          liked: "aremu",
+          total: "30999",
+        },
+        {
+          topImage:
+            "https://static.remove.bg/remove-bg-web/2a274ebbb5879d870a69caae33d94388a88e0e35/assets/start-0e837dcc57769db2306d8d659f53555feb500b3c5d456879b9c843d1872e7baa.jpg",
+          name: "Custom component",
+          add: "mumbai, india",
+          pic:
+            "https://static.remove.bg/remove-bg-web/2a274ebbb5879d870a69caae33d94388a88e0e35/assets/start-0e837dcc57769db2306d8d659f53555feb500b3c5d456879b9c843d1872e7baa.jpg",
+          title: "Some quick example text to",
+          updated: "3 weeks ago",
+          liked: "aremu",
+          total: "30999",
+        },
+      ],
+    };
+  },
+};
+</script>
+
 <style scoped>
 .flex-shrink-0 {
   height: 50px;
