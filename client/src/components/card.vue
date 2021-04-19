@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row mt-5">
       <div
-        class="col-sm-12 col-md-4 col-lg-4 col-xl-4 mb-4"
+        class="col-sm-12 col-md-6 col-lg-6 col-xl-4 mb-4"
         v-for="item in items"
         :key="item._id"
       >
@@ -41,6 +41,54 @@ export default {
   data() {
     return {
       items: [
+        {
+          topImage:
+            "https://media.istockphoto.com/photos/retro-styled-handsome-ethnic-man-with-glasses-picture-id961882900?k=6&m=961882900&s=612x612&w=0&h=vIk3O71I_kdmQfCPH9UwXcZjBfCRRg56x4G9k3G8jDM=",
+          name: "Custom component",
+          add: "mumbai, india",
+          pic:
+            "https://static.remove.bg/remove-bg-web/2a274ebbb5879d870a69caae33d94388a88e0e35/assets/start-0e837dcc57769db2306d8d659f53555feb500b3c5d456879b9c843d1872e7baa.jpg",
+          title: "Some quick example text to",
+          updated: "3 weeks ago",
+          liked: "aremu",
+          total: "30999",
+        },
+        {
+          topImage:
+            "https://image.shutterstock.com/image-photo/head-shoulders-portrait-young-african-260nw-388588540.jpg",
+          name: "Custom component",
+          add: "mumbai, india",
+          pic:
+            "https://image.shutterstock.com/image-photo/head-shoulders-portrait-young-african-260nw-388588540.jpg",
+          title: "Some quick example text to",
+          updated: "3 weeks ago",
+          liked: "aremu",
+          total: "30999",
+        },
+        {
+          topImage:
+            "https://image.shutterstock.com/image-photo/head-shoulders-portrait-young-african-260nw-388588540.jpg",
+          name: "Custom component",
+          add: "mumbai, india",
+          pic:
+            "https://image.shutterstock.com/image-photo/head-shoulders-portrait-young-african-260nw-388588540.jpg",
+          title: "Some quick example text to",
+          updated: "3 weeks ago",
+          liked: "aremu",
+          total: "30999",
+        },
+        {
+          topImage:
+            "https://static.remove.bg/remove-bg-web/2a274ebbb5879d870a69caae33d94388a88e0e35/assets/start-0e837dcc57769db2306d8d659f53555feb500b3c5d456879b9c843d1872e7baa.jpg",
+          name: "Custom component",
+          add: "mumbai, india",
+          pic:
+            "https://static.remove.bg/remove-bg-web/2a274ebbb5879d870a69caae33d94388a88e0e35/assets/start-0e837dcc57769db2306d8d659f53555feb500b3c5d456879b9c843d1872e7baa.jpg",
+          title: "Some quick example text to",
+          updated: "3 weeks ago",
+          liked: "aremu",
+          total: "30999",
+        },
         {
           topImage:
             "https://static.remove.bg/remove-bg-web/2a274ebbb5879d870a69caae33d94388a88e0e35/assets/start-0e837dcc57769db2306d8d659f53555feb500b3c5d456879b9c843d1872e7baa.jpg",
@@ -106,11 +154,14 @@ export default {
 }
 h5 {
   margin-top: 1em;
+  font-weight: 900;
+  font-size: large;
 }
 .name {
   text-align: left;
   margin-top: -8px;
-  font-weight: 600;
+  font-weight: 700;
+  font-size: x-small;
 }
 .fas {
   margin: 0.5em 1em 0 0.5em;
@@ -118,6 +169,10 @@ h5 {
 .fas,
 .fab {
   font-size: large;
+  color: #d8e3e7;
+}
+b{
+  font-size: x-medium;
 }
 .card-title {
   margin-top: 0;

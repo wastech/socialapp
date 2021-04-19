@@ -1,15 +1,13 @@
 <template>
   <div class="container">
     <div class="row ">
-      <div class="col-sm-12 col-md-8 col-lg-8 col-xl-9">
+      <div class="col-sm-12 col-md-8 col-lg-8 col-xl-9 ">
         <appHeader />
-        <card/>
+        <card />
       </div>
-      <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+      <div class="col-sm-12 col-md-4 col-lg-4 col-xl-3">
         <profile />
       </div>
-
-      
     </div>
   </div>
 </template>
@@ -25,13 +23,14 @@ export default {
   components: {
     appHeader,
     profile,
-    card
+    card,
   },
 };
 </script>
 
 <style scoped>
-.container{
+.container {
   max-width: 96%;
 }
+
 </style>
