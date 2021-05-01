@@ -37,11 +37,29 @@
         extremely awesome hello this is extremely awesome
       </p>
     </div>
+
+    <section>
+      <story />
+    </section>
+    <div class="d-grid gap-2">
+    <button type="button" class="btn1 ">Create Post</button>
+    </div>
   </div>
 </template>
+<script>
+import story from "@/components/story";
+
+export default {
+  components: {
+    story,
+  },
+};
+</script>
+
 <style scoped>
 .main {
   margin-top: 9.7em;
+  position: stick;
 }
 img {
   width: 100px;
@@ -82,6 +100,25 @@ h6 {
 h3 {
   font-weight: 900;
   font-size: x-large;
-text-transform: capitalize;
+  text-transform: capitalize;
+}
+.btn1 {
+  background: #833ab4; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to bottom,
+    #fcb045,
+    #fd1d1d,
+    #833ab4
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #fcb045,
+    #fd1d1d,
+    #833ab4
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color:#fff;
+  border: none;
+  font-size: x-large;
+  font-weight: 700;
 }
 </style>
