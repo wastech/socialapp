@@ -10,12 +10,14 @@
       </div>
     </div>
     <div class="row ">
-      <div class="  col-sm-12 col-md-8 col-lg-10 col-xl-10">
+      <div class="  col-sm-12 col-md-8 col-lg-10 col-xl-9">
         <userPost />
       </div>
 
-      <div class="col-sm-12 col-md-4 col-lg-2 col-xl-2">
+      <div class="col-sm-12 col-md-4 col-lg-2 col-xl-3">
         <userInfo/>
+        <userFriend/>
+
       </div>
     </div>
   </div>
@@ -24,8 +26,9 @@
 <script>
 import userPost from "@/components/userPost.vue";
 import userInfo from "@/components/userInfo.vue";
+import userFriend from "@/components/userFriend.vue";
 export default {
-  components: { userPost,userInfo },
+  components: { userPost,userInfo,userFriend },
 };
 </script>
 <style scoped>
