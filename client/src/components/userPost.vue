@@ -171,7 +171,7 @@ h5 {
   font-size: large;
   color: #d8e3e7;
 }
-b{
+b {
   font-size: x-medium;
 }
 .card-title {
@@ -199,7 +199,7 @@ q {
 .card-body {
   margin-top: -13px;
 }
-.top{
-  margin-top: 11em;
+.top {
+  margin-top: 2em;
 }
 </style>

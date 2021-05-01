@@ -9,15 +9,66 @@
         <h2 class="title">aremu aremu</h2>
       </div>
     </div>
+    <!-- Button trigger modal -->
+    <div class="b">
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+      >
+        create Post
+      </button>
+    </div>
+
     <div class="row ">
       <div class="  col-sm-12 col-md-8 col-lg-10 col-xl-9">
         <userPost />
       </div>
 
       <div class="col-sm-12 col-md-4 col-lg-2 col-xl-3">
-        <userInfo/>
-        <userFriend/>
+        <userInfo />
+        <userFriend />
+      </div>
+    </div>
 
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Create Post</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="form-floating">
+              <textarea
+                class="form-control"
+                placeholder="Leave a comment here"
+                id="floatingTextarea2"
+                style="height: 100px"
+              ></textarea>
+              <label for="floatingTextarea2">your post...</label>
+            </div>
+            <div class="mb-3 mt-3">
+              <input class="form-control" type="file" id="formFile" />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Post</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -28,7 +79,7 @@ import userPost from "@/components/userPost.vue";
 import userInfo from "@/components/userInfo.vue";
 import userFriend from "@/components/userFriend.vue";
 export default {
-  components: { userPost,userInfo,userFriend },
+  components: { userPost, userInfo, userFriend },
 };
 </script>
 <style scoped>
@@ -65,5 +116,13 @@ h6 {
   margin-bottom: 0.5rem;
   font-weight: 900;
   line-height: 1.2;
+}
+.b {
+  text-align: center;
+  margin-top: 10em;
+}
+.btn{
+  background-color: #fc466b;
+  color: #fff;
 }
 </style>

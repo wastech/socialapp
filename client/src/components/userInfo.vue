@@ -28,7 +28,7 @@ export default {
 </script>
 <style scoped>
 .main {
-  margin-top: 11em;
+  margin-top: 2em;
 }
 h2 {
   font-size: x-large;
