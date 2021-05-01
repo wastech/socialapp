@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="container">
     <div class="d-flex justify-content-between">
       <div class="__instagram">
         <div class=""><i class="fab fa-instagram"></i> <small>instagram</small></div>

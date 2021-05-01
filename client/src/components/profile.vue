@@ -42,7 +42,7 @@
       <story />
     </section>
     <div class="d-grid gap-2">
-    <button type="button" class="btn1 ">Create Post</button>
+      <button type="button" class="btn1 ">Create Post</button>
     </div>
   </div>
 </template>
@@ -116,7 +116,7 @@ h3 {
     #fd1d1d,
     #833ab4
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  color:#fff;
+  color: #fff;
   border: none;
   font-size: x-large;
   font-weight: 700;
