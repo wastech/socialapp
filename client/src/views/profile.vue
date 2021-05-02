@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container mt-3">
     <div class=" bg">
       <div class="image">
         <img
@@ -21,6 +21,7 @@
       </button>
     </div>
 
+ 
     <div class="row ">
       <div class="  col-sm-12 col-md-8 col-lg-10 col-xl-9">
         <userPost />
@@ -52,18 +53,8 @@
             ></button>
           </div>
           <div class="modal-body">
-            <div class="form-floating">
-              <textarea
-                class="form-control"
-                placeholder="Leave a comment here"
-                id="floatingTextarea2"
-                style="height: 100px"
-              ></textarea>
-              <label for="floatingTextarea2">your post...</label>
-            </div>
-            <div class="mb-3 mt-3">
-              <input class="form-control" type="file" id="formFile" />
-            </div>
+               <createPost/>
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary">Post</button>
@@ -78,8 +69,9 @@
 import userPost from "@/components/userPost.vue";
 import userInfo from "@/components/userInfo.vue";
 import userFriend from "@/components/userFriend.vue";
+import createPost from "@/components/createPost.vue";
 export default {
-  components: { userPost, userInfo, userFriend },
+  components: { userPost, userInfo, userFriend,createPost },
 };
 </script>
 <style scoped>
