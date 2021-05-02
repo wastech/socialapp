@@ -7,7 +7,7 @@
         </div>
       </div>
       <div class="searchBar">
-        <div data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <div data-bs-toggle="modal" data-bs-target="#exampleModal1">
           <i class="fas fa-search"></i> <span>search</span>
         </div>
       </div>
@@ -15,7 +15,7 @@
     <!-- Modal -->
     <div
       class="modal fade"
-      id="exampleModal"
+      id="exampleModal1"
       tabindex="-1"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
@@ -80,7 +80,7 @@ small {
   font-size: x-large;
   border-radius: 5px;
 }
-h6{
+h6 {
   margin-top: 1em;
   font-weight: 700;
   font-size: x-medium;

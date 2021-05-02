@@ -17,6 +17,17 @@ const routes = [
     name: "friendProfile",
     component: () => import("../views/friendProfile.vue"),
   },
+
+  {
+    path: "/signup",
+    name: "signup",
+    component: () => import("../views/signUp.vue"),
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: () => import("../views/login.vue"),
+  },
 ];
 
 const router = createRouter({

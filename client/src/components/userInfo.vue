@@ -33,6 +33,7 @@ export default {
 h2 {
   font-size: x-large;
   font-weight: 900;
+  text-transform: capitalize;
 }
 span {
   font-weight: 600;
