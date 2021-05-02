@@ -1,5 +1,7 @@
 <template>
   <div class="main">
+    <button type="button" class="btn btn-primary btn-sm">Follow +</button>
+    <button type="button" class="btn btn-primary btn-sm">Unfollow -</button>
     <div class="title">
       <h2>user information</h2>
       <div class="info" v-for="item in items" :key="item.id">
@@ -28,7 +30,7 @@ export default {
 </script>
 <style scoped>
 .main {
-  margin-top: 13em;
+  margin-top: 16em;
 }
 h2 {
   font-size: x-large;

@@ -8,7 +8,22 @@
         />
         <h2 class="title">aremu aremu</h2>
       </div>
+      <div class="d-flex justify-content-between">
+        <div>
+          <h5>45</h5>
+          <h6>posts</h6>
+        </div>
+        <div>
+          <h5>555</h5>
+          <h6>followers</h6>
+        </div>
+        <div>
+          <h5>44444</h5>
+          <h6>following</h6>
+        </div>
+      </div>
     </div>
+
     <!-- Button trigger modal -->
 
     <div class="row ">
@@ -67,5 +82,11 @@ h6 {
   margin-bottom: 0.5rem;
   font-weight: 900;
   line-height: 1.2;
+}
+
+.d-flex{
+  max-width: 40%;
+  margin: 0 auto;
+ 
 }
 </style>

@@ -119,6 +119,6 @@ export default {
 
 <style scoped>
 .top {
-  margin-top: 12em;
+  margin-top: 16em;
 }
 </style>
