@@ -14,6 +14,7 @@
               type="email"
               class="form-control"
               id="exampleInputEmail1"
+              v-model="email"
               aria-describedby="emailHelp"
               placeholder="email"
             />
@@ -22,13 +23,20 @@
             <input
               type="password"
               class="form-control "
+              v-model="password"
               id="exampleInputPassword1"
               placeholder="password"
             />
           </div>
 
           <div class="d-grid gap-2 ">
-            <button class="btn btn-primary" type="button">log in</button>
+            <button
+              class="btn btn-primary"
+              type="button"
+              v-on:click.prevent="validateInputs"
+            >
+              log in
+            </button>
           </div>
           <section>
             <div class="text">
@@ -46,6 +54,45 @@
     </div>
   </div>
 </template>
+<script>
+import AuthenticationService from "@/services/AuthenticationService";
+export default {
+  data() {
+    return {
+      email: "",
+      password: "",
+    };
+  },
+  methods: {
+    validateInputs() {
+      this.login();
+    },
+    async login() {
+      try {
+        const response = await AuthenticationService.login({
+          email: this.email,
+          password: this.password,
+        });
+        this.$store.dispatch("setToken", response.data.token);
+        this.$store.dispatch("setUser", response.data.user.name);
+        this.$router.push({
+          name: "Home",
+        });
+        // this.$router.replace(this.$route.query.from);
+        this.$toast.success(response.data.message, {
+          position: "top",
+        });
+        console.log("date", response.data.user.name);
+      } catch (error) {
+        this.$toast.error(error.response.data.error, {
+          position: "top",
+        });
+        console.log("error", error.response.data.error);
+      }
+    },
+  },
+};
+</script>
 <style scoped>
 .text {
   text-align: center;
@@ -72,16 +119,15 @@ form {
   text-align: center;
 }
 h2 {
-  font-size:5em;
+  font-size: 5em;
   font-weight: 900;
   color: blue;
 }
-p{
+p {
   font-size: x-large;
   font-weight: 900;
-  
 }
-.row{
+.row {
   margin-top: 5em;
 }
 </style>
