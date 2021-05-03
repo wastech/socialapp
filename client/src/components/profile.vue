@@ -11,7 +11,14 @@
     </div>
     <div class="profession">
       <h6>software developer</h6>
-      <button type="button" class="btn btn-dark">Edit</button>
+      <button
+        type="button"
+        class="btn btn-dark"
+        data-bs-toggle="modal"
+        data-bs-target="#picupdate"
+      >
+        Edit
+      </button>
     </div>
     <div class="d-flex justify-content-between">
       <div>
@@ -55,7 +62,7 @@
     <!-- Modal -->
     <div
       class="modal fade"
-      id="exampleModal"
+      id="picupdate"
       tabindex="-1"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
@@ -63,7 +70,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Create Post</h5>
+            <h5 class="modal-title" id="exampleModalLabel">update</h5>
             <button
               type="button"
               class="btn-close"
@@ -72,7 +79,7 @@
             ></button>
           </div>
           <div class="modal-body">
-            <createPost />
+            <modal />
           </div>
         </div>
       </div>
@@ -82,12 +89,12 @@
 <script>
 import story from "@/components/story";
 import AuthenticationService from "@/services/AuthenticationService";
-import createPost from "@/components/createPost";
+import modal from "@/components/modal";
 
 export default {
   components: {
     story,
-    createPost,
+    modal,
   },
   data() {
     return {

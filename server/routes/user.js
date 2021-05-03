@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const requireLogin = require("../middleware/requireLogin");
 const Post = mongoose.model("Post");
 const User = mongoose.model("User");
+const uploader = require("../config/cloudinary");
 
 router.get("/user/:id", requireLogin, (req, res) => {
   User.findOne({ _id: req.params.id })
@@ -97,10 +98,10 @@ router.put("/unfollow", requireLogin, (req, res) => {
   );
 });
 
-router.put("/updatepic", requireLogin, (req, res) => {
+router.put("/updatepic",uploader.single("image"), requireLogin, (req, res) => {
   User.findByIdAndUpdate(
     req.user._id,
-    { $set: { pic: req.body.pic } },
+    { $set: { pic: req.file.url } },
     { new: true },
     (err, result) => {
       if (err) {
