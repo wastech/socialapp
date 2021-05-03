@@ -7,7 +7,7 @@
       />
     </div>
     <div class="name">
-      <h2>aremu aremu</h2>
+      <h2>{{ post.name }}</h2>
     </div>
     <div class="profession">
       <h6>software developer</h6>
@@ -19,7 +19,7 @@
         <h6>posts</h6>
       </div>
       <div>
-        <h5>555</h5>
+        <h5>{{ post.followers }}</h5>
         <h6>followers</h6>
       </div>
       <div>
@@ -74,7 +74,6 @@
           <div class="modal-body">
             <createPost />
           </div>
-         
         </div>
       </div>
     </div>
@@ -82,12 +81,34 @@
 </template>
 <script>
 import story from "@/components/story";
+import AuthenticationService from "@/services/AuthenticationService";
 import createPost from "@/components/createPost";
 
 export default {
   components: {
     story,
     createPost,
+  },
+  data() {
+    return {
+      post: {},
+    };
+  },
+
+  methods: {
+    async getPosts() {
+      try {
+        await AuthenticationService.user().then((response) => {
+          this.post = response.data;
+          console.log("respose", response.data);
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    },
+  },
+  async mounted() {
+    this.getPosts();
   },
 };
 </script>
@@ -157,8 +178,8 @@ h3 {
   font-size: x-large;
   font-weight: 700;
 }
-.btn1:focus{
+.btn1:focus {
   outline: none;
-   border: none;
+  border: none;
 }
 </style>

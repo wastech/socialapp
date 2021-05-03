@@ -23,6 +23,19 @@ router.get("/user/:id", requireLogin, (req, res) => {
     });
 });
 
+router.get("/me", requireLogin, (req, res) => {
+  User.findById({ _id: req.user._id })
+    .select("-password")
+    .exec(function (err, user) {
+      if (err)
+        return res
+          .status(500)
+          .json({ message: "The server was unable to complete your request." });
+
+      res.status(200).json(user);
+    });
+});
+
 router.put("/follow", requireLogin, (req, res) => {
   User.findByIdAndUpdate(
     req.body.followId,
