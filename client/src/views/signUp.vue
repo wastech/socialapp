@@ -10,7 +10,12 @@
       <div class=" col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 login-box">
         <form>
           <div class="mb-3 input-group-lg">
-            <input type="text" class="form-control" placeholder="username" />
+            <input
+              type="text"
+              class="form-control"
+              placeholder="username"
+              v-model="name"
+            />
           </div>
 
           <div class="mb-3 input-group-lg">
@@ -20,6 +25,7 @@
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
               placeholder="email"
+              v-model="email"
             />
           </div>
           <div class="mb-3 input-group-lg">
@@ -28,6 +34,7 @@
               class="form-control "
               id="exampleInputPassword1"
               placeholder="password"
+              v-model="password"
             />
           </div>
           <div class="mb-3 input-group-lg">
@@ -40,7 +47,13 @@
           </div>
 
           <div class="d-grid gap-2 ">
-            <button class="btn btn-primary" type="button">Sign Up</button>
+            <button
+              class="btn btn-primary"
+              type="button"
+              v-on:click.prevent="validateInputs"
+            >
+              Sign Up
+            </button>
           </div>
 
           <div class="d-grid gap-2 col-6 mx-auto">
@@ -53,6 +66,45 @@
     </div>
   </div>
 </template>
+<script>
+import AuthenticationService from "@/services/AuthenticationService";
+export default {
+  data() {
+    return {
+      name: "",
+      email: "",
+
+      password: "",
+    };
+  },
+  methods: {
+    validateInputs() {
+      this.signUp();
+    },
+    async signUp() {
+      try {
+        const response = await AuthenticationService.register({
+          email: this.email,
+          name: this.name,
+          // lastname: this.lastname,
+          password: this.password,
+        });
+
+        this.$toast.success(response.data.message, {
+          position: "top",
+        });
+        this.$router.push({
+          name: "login",
+        });
+      } catch (error) {
+        this.$toast.error(error.response.data.error, {
+          position: "top",
+        });
+      }
+    },
+  },
+};
+</script>
 <style scoped>
 .text {
   text-align: center;
