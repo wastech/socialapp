@@ -26,6 +26,7 @@ router.get("/user/:id", requireLogin, (req, res) => {
 
 router.get("/me", requireLogin, (req, res) => {
   User.findById({ _id: req.user._id })
+    .populate("post")
     .select("-password")
     .exec(function (err, user) {
       if (err)
@@ -98,7 +99,7 @@ router.put("/unfollow", requireLogin, (req, res) => {
   );
 });
 
-router.put("/updatepic",uploader.single("image"), requireLogin, (req, res) => {
+router.put("/updatepic", uploader.single("image"), requireLogin, (req, res) => {
   User.findByIdAndUpdate(
     req.user._id,
     { $set: { pic: req.file.url } },

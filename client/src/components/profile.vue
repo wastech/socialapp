@@ -1,10 +1,7 @@
 <template>
   <div class="main">
     <div class="image">
-      <img
-        src="https://static.remove.bg/remove-bg-web/2a274ebbb5879d870a69caae33d94388a88e0e35/assets/start-0e837dcc57769db2306d8d659f53555feb500b3c5d456879b9c843d1872e7baa.jpg"
-        alt=""
-      />
+      <img :src="post.pic" alt="" />
     </div>
     <div class="name">
       <h2>{{ post.name }}</h2>
@@ -22,20 +19,20 @@
     </div>
     <div class="d-flex justify-content-between">
       <div>
-        <h5>45</h5>
+        <h5></h5>
         <h6>posts</h6>
       </div>
       <div>
-        <h5>{{ post.followers }}</h5>
+        <h5>{{ followers }}</h5>
         <h6>followers</h6>
       </div>
       <div>
-        <h5>44444</h5>
+        <h5>{{ following }}</h5>
         <h6>following</h6>
       </div>
     </div>
     <div class="fullname">
-      <h3>aremu aremu</h3>
+      <h3>{{ $store.state.title }}</h3>
     </div>
     <div class="description">
       <p>
@@ -88,7 +85,8 @@
 </template>
 <script>
 import story from "@/components/story";
-import AuthenticationService from "@/services/AuthenticationService";
+import { mapState } from "vuex";
+import postService from "@/services/postService";
 import modal from "@/components/modal";
 
 export default {
@@ -99,14 +97,19 @@ export default {
   data() {
     return {
       post: {},
+      post_length: "",
+      followers: "",
     };
   },
 
   methods: {
     async getPosts() {
       try {
-        await AuthenticationService.user().then((response) => {
+        await postService.mypost().then((response) => {
           this.post = response.data;
+          this.post_length = response.data;
+          this.followers = response.data.followers.length;
+          this.following = response.data.following.length;
           console.log("respose", response.data);
         });
       } catch (err) {

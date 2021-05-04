@@ -6,7 +6,7 @@
           src="https://static.remove.bg/remove-bg-web/2a274ebbb5879d870a69caae33d94388a88e0e35/assets/start-0e837dcc57769db2306d8d659f53555feb500b3c5d456879b9c843d1872e7baa.jpg"
           alt=""
         />
-        <h2 class="title">aremu aremu</h2>
+        <h2 class="title">{{ post.name }}</h2>
       </div>
     </div>
     <!-- Button trigger modal -->
@@ -21,7 +21,6 @@
       </button>
     </div>
 
- 
     <div class="row ">
       <div class="  col-sm-12 col-md-8 col-lg-10 col-xl-9">
         <userPost />
@@ -53,8 +52,7 @@
             ></button>
           </div>
           <div class="modal-body">
-               <createPost/>
-
+            <createPost />
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary">Post</button>
@@ -71,7 +69,7 @@ import userInfo from "@/components/userInfo.vue";
 import userFriend from "@/components/userFriend.vue";
 import createPost from "@/components/createPost.vue";
 export default {
-  components: { userPost, userInfo, userFriend,createPost },
+  components: { userPost, userInfo, userFriend, createPost },
 };
 </script>
 <style scoped>
@@ -113,7 +111,7 @@ h6 {
   text-align: center;
   margin-top: 10em;
 }
-.btn{
+.btn {
   background-color: #fc466b;
   color: #fff;
 }

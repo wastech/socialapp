@@ -75,6 +75,7 @@ export default {
         });
         this.$store.dispatch("setToken", response.data.token);
         this.$store.dispatch("setUser", response.data.user.name);
+
         this.$router.push({
           name: "Home",
         });

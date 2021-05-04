@@ -11,6 +11,6 @@ export default {
     return Api().get("me");
   },
   update(update) {
-    return Api().put("api/update", update);
+    return Api().put("updatepic", update);
   },
 };

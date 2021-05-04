@@ -1,56 +1,81 @@
 <template>
   <div class="">
     <form action="">
-      <div class="col">
-        <input
-          class="form-control"
-          id="formFileLg"
-          type="file"
-          ref="file"
-          @change="onSelect()"
-        />
+      <div class="d-flex position-relative">
+        <div v-if="!image">
+          <p>Select an image</p>
+          <input type="file" @change="onFileChange" />
+        </div>
+
+        <div v-else>
+          <img :src="image" />
+          <button @click="removeImage">Remove image</button>
+        </div>
       </div>
-      <button class="btn" @click="onSubmit()"></button>
     </form>
   </div>
 </template>
 <script>
-import axios from "axios";
+import AuthenticationService from "@/services/AuthenticationService";
 export default {
+  components: {},
   data() {
     return {
-      file: "",
+      image: "",
+      item: {},
+      post: {},
     };
   },
-  created() {
-    this.fetchTasks();
-  },
-
   methods: {
-    fetchTasks() {
-     
-     
+    onFileChange(e) {
+      var files = e.target.files || e.dataTransfer.files;
+      if (!files.length) return;
+      this.createImage(files[0]);
     },
-    onSelect() {
-      this.file = this.$refs.file.files[0];
+    createImage(file) {
+      var image = new Image();
+      var reader = new FileReader();
+      var vm = this;
+      reader.onload = (e) => {
+        vm.image = e.target.result;
+      };
+      reader.readAsDataURL(file);
     },
-    onSubmit() {
-      let formData = new FormData();
-      formData.append("pic", this.file);
-
-      axios
-        .post("https://naijanews.herokuapp.com/api/news", formData)
-        .then(() => {
-          console.log("Successfully created new user");
-          // this.$router.push("/");
-        })
-        .catch((err) => {
-          console.log(err);
-          this.error = err.response.data.err;
+    removeImage: function(e) {
+      this.image = "";
+    },
+    async getPosts() {
+      try {
+        await AuthenticationService.user().then((response) => {
+          this.post = response.data;
         });
+      } catch (err) {
+        console.log(err);
+      }
     },
+    async save() {
+      try {
+        await AuthenticationService.update(this.item).then((response) => {
+          this.$toast.success(response.data.message, {
+            position: "top",
+          });
+          this.getPosts();
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    },
+  },
+  async mounted() {
+    this.getPosts();
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+img {
+  width: 100px;
+  border-radius: 100px;
+  height: 100px;
+}
+</style>
