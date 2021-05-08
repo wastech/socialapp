@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="row ">
+    <div class="row rw ">
       <div class=" col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
         <div class="about">
           <h2>wastech</h2>
@@ -39,11 +39,51 @@
           </div>
           <div class="mb-3 input-group-lg">
             <input
-              type="password"
+              type="text"
               class="form-control "
               id="exampleInputPassword1"
-              placeholder="confirm password"
+              placeholder="full name"
+              v-model="fullName"
             />
+          </div>
+          <div class="mb-3">
+            <textarea
+              class="form-control"
+              placeholder="bio"
+              id="exampleFormControlTextarea1"
+              rows="3"
+              v-model="bio"
+            ></textarea>
+          </div>
+
+          <div class="row g-3">
+            <div class="col">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="city"
+                aria-label="city..."
+                v-model="city"
+              />
+            </div>
+            <div class="col">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="nationality"
+                aria-label="Nationality .."
+                v-model="nationality"
+              />
+            </div>
+            <div class="col">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="status (single/married)"
+                aria-label="Last name"
+                v-model="status"
+              />
+            </div>
           </div>
 
           <div class="d-grid gap-2 ">
@@ -75,6 +115,11 @@ export default {
       email: "",
 
       password: "",
+      nationality: "",
+      bio: "",
+      city: "",
+      status: "",
+      fullName: "",
     };
   },
   methods: {
@@ -88,6 +133,11 @@ export default {
           name: this.name,
           // lastname: this.lastname,
           password: this.password,
+          nationality: this.nationality,
+          bio: this.bio,
+          city: this.city,
+          status: this.status,
+          fullName: this.fullName,
         });
 
         this.$toast.success(response.data.message, {
@@ -139,8 +189,8 @@ p {
   font-size: x-large;
   font-weight: 900;
 }
-.row {
-  margin-top: 5em;
+.rw {
+  margin-top: 2em;
 }
 .d-grid {
   margin-top: 1em;

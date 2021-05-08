@@ -21,7 +21,17 @@ const transporter = nodemailer.createTransport(
 );
 
 router.post("/signup", (req, res) => {
-  const { name, email, password, pic } = req.body;
+  const {
+    name,
+    email,
+    password,
+    pic,
+    nationality,
+    bio,
+    city,
+    status,
+    fullName,
+  } = req.body;
   if (!email || !password || !name) {
     return res.status(422).json({ error: "please add all the fields" });
   }
@@ -38,6 +48,11 @@ router.post("/signup", (req, res) => {
           password: hashedpassword,
           name,
           pic,
+          nationality,
+          bio,
+          city,
+          status,
+          fullName,
         });
 
         user
@@ -49,7 +64,7 @@ router.post("/signup", (req, res) => {
             //     subject:"signup success",
             //     html:"<h1>welcome to instagram</h1>"
             // })
-            res.json({ message: "saved successfully" });
+            res.json({ message: "saved successfully", user });
           })
           .catch((err) => {
             console.log(err);

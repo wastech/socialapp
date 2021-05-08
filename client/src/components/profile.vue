@@ -32,13 +32,11 @@
       </div>
     </div>
     <div class="fullname">
-      <h3>{{ $store.state.title }}</h3>
+      <h3>{{ post.fullName}}</h3>
     </div>
     <div class="description">
       <p>
-        hello this is extremely awesomehello this is extremely awesome hello
-        this is extremely awesomev hello this is extremely awesome hello this is
-        extremely awesome hello this is extremely awesome
+        {{ post.bio }}
       </p>
     </div>
 
@@ -99,6 +97,7 @@ export default {
       post: {},
       post_length: "",
       followers: "",
+      following: "",
     };
   },
 
@@ -110,7 +109,6 @@ export default {
           this.post_length = response.data;
           this.followers = response.data.followers.length;
           this.following = response.data.following.length;
-          console.log("respose", response.data);
         });
       } catch (err) {
         console.log(err);

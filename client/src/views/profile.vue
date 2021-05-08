@@ -2,11 +2,8 @@
   <div class="container mt-3">
     <div class=" bg">
       <div class="image">
-        <img
-          src="https://static.remove.bg/remove-bg-web/2a274ebbb5879d870a69caae33d94388a88e0e35/assets/start-0e837dcc57769db2306d8d659f53555feb500b3c5d456879b9c843d1872e7baa.jpg"
-          alt=""
-        />
-        <h2 class="title">{{ post.name }}</h2>
+        <img :src="post.pic" alt="" />
+        <h2 class="title">{{post.fullName}}</h2>
       </div>
     </div>
     <!-- Button trigger modal -->
@@ -23,11 +20,11 @@
 
     <div class="row ">
       <div class="  col-sm-12 col-md-8 col-lg-10 col-xl-9">
-        <userPost />
+        <userPost  />
       </div>
 
       <div class="col-sm-12 col-md-4 col-lg-2 col-xl-3">
-        <userInfo />
+        <userInfo :post="post" />
         <userFriend />
       </div>
     </div>
@@ -64,14 +61,38 @@
 </template>
 
 <script>
+import postService from "@/services/postService";
 import userPost from "@/components/userPost.vue";
 import userInfo from "@/components/userInfo.vue";
 import userFriend from "@/components/userFriend.vue";
 import createPost from "@/components/createPost.vue";
 export default {
   components: { userPost, userInfo, userFriend, createPost },
+  data() {
+    return {
+      post: {},
+    };
+  },
+  methods: {
+    async getPosts() {
+      try {
+        await postService.mypost().then((response) => {
+          this.post = response.data;
+          this.post_length = response.data;
+          this.followers = response.data.followers.length;
+          this.following = response.data.following.length;
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    },
+  },
+  async mounted() {
+    this.getPosts();
+  },
 };
 </script>
+
 <style scoped>
 .bg {
   background-image: url("https://static.remove.bg/remove-bg-web/2a274ebbb5879d870a69caae33d94388a88e0e35/assets/start-0e837dcc57769db2306d8d659f53555feb500b3c5d456879b9c843d1872e7baa.jpg");

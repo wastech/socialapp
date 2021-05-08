@@ -27,7 +27,6 @@ export default {
   data() {
     return {
       file: "",
-     
     };
   },
   methods: {
@@ -52,7 +51,6 @@ export default {
             position: "top",
           });
         });
-        console.log("this is image", this.file);
       } catch (err) {
         console.log(err);
       }
