@@ -4,7 +4,7 @@ export default {
   mypost() {
     return Api().get("me");
   },
-  update(update) {
+  postpic(update) {
     return Api().put("updatepic", update);
   },
 };

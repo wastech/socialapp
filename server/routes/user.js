@@ -99,16 +99,18 @@ router.put("/unfollow", requireLogin, (req, res) => {
   );
 });
 
-router.put("/updatepic", uploader.single("image"), requireLogin, (req, res) => {
+router.put("/updatepic", uploader.single("pic"), requireLogin, (req, res) => {
+  const pic = req.file.path;
+  console.log(req.file);
   User.findByIdAndUpdate(
     req.user._id,
-    { $set: { pic: req.file.url } },
+    { $set: { pic } },
     { new: true },
     (err, result) => {
       if (err) {
         return res.status(422).json({ error: "pic canot post" });
       }
-      res.json(result);
+      res.json({ message: "updated successfully", result });
     }
   );
 });

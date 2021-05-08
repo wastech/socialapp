@@ -8,6 +8,7 @@ const app = express();
 
 cloudinary.config({
   cloud_name: "wastech",
+  folder: "profile-pictures",
   api_key: "365496934417421",
   api_secret: "mJaPuAL7fmZKuR6tVZi53zXkQ7E",
 });
@@ -15,6 +16,9 @@ cloudinary.config({
 var storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   allowedFormats: ["jpg", "png", "mp3"],
+  filename: function (req, file, cb) {
+    cb(null, file.originalname); // The file on cloudinary would have the same name as the original file name
+  },
   // transformation: [{ width: 500, height: 500, crop: "limit" }],
 });
 

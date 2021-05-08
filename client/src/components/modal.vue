@@ -2,73 +2,65 @@
   <div class="">
     <form action="">
       <div class="d-flex position-relative">
-        <div v-if="!image">
-          <p>Select an image</p>
-          <input type="file" @change="onFileChange" />
+        <div class="col">
+          <input
+            class="form-control"
+            id="formFileLg"
+            type="file"
+            ref="file"
+            @change="onSelect()"
+          />
         </div>
-
-        <div v-else>
-          <img :src="image" />
-          <button @click="removeImage">Remove image</button>
+        <div class="d-grid">
+          <button class="btn btn-primary" type="button" @click="onSubmit()">
+            submit
+          </button>
         </div>
       </div>
     </form>
   </div>
 </template>
 <script>
-import AuthenticationService from "@/services/AuthenticationService";
+import postService from "@/services/postService";
 export default {
   components: {},
   data() {
     return {
-      image: "",
-      item: {},
-      post: {},
+      file: "",
+     
     };
   },
   methods: {
-    onFileChange(e) {
-      var files = e.target.files || e.dataTransfer.files;
-      if (!files.length) return;
-      this.createImage(files[0]);
+    // async getPosts() {
+    //   try {
+    //     await postService.user().then((response) => {
+    //       this.post = response.data;
+    //     });
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // },
+    onSelect() {
+      this.file = this.$refs.file.files[0];
     },
-    createImage(file) {
-      var image = new Image();
-      var reader = new FileReader();
-      var vm = this;
-      reader.onload = (e) => {
-        vm.image = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    },
-    removeImage: function(e) {
-      this.image = "";
-    },
-    async getPosts() {
+    async onSubmit() {
       try {
-        await AuthenticationService.user().then((response) => {
-          this.post = response.data;
-        });
-      } catch (err) {
-        console.log(err);
-      }
-    },
-    async save() {
-      try {
-        await AuthenticationService.update(this.item).then((response) => {
+        let formData = new FormData();
+        formData.append("pic", this.file);
+        await postService.postpic(formData).then((response) => {
           this.$toast.success(response.data.message, {
             position: "top",
           });
-          this.getPosts();
         });
+        console.log("this is image", this.file);
       } catch (err) {
         console.log(err);
       }
     },
   },
-  async mounted() {
-    this.getPosts();
-  },
+  // async mounted() {
+  //   this.getPosts();
+  // },
 };
 </script>
 
