@@ -7,7 +7,7 @@ const uploader = require("../config/cloudinary");
 
 router.get("/allpost", requireLogin, (req, res) => {
   Post.find()
-    .populate("postedBy", "_id name")
+    .populate("postedBy", "_id name pic nationality cite")
     .populate("comments.postedBy", "_id name")
     .sort("-createdAt")
     .then((posts) => {

@@ -86,7 +86,9 @@ export default {
           this.$toast.success(response.data.message, {
             position: "top",
           });
-          console.log("response", response.data.message);
+          this.$router.push({
+            name: "Home",
+          });
         });
       } catch (error) {
         this.$toast.error(error.response.data.error, {

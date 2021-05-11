@@ -8,26 +8,41 @@
       >
         <div class="card">
           <div class="d-flex position-relative">
-            <img :src="item.topImage" class="flex-shrink-0 me-3" alt="..." />
+            <div v-if="item.postedBy">
+              <img
+                :src="item.postedBy.pic"
+                class="flex-shrink-0 me-3"
+                alt="..."
+              />
+            </div>
+
             <div>
-              <h5 class="">{{ item.name }}</h5>
-              <p class="name">{{ item.add }}</p>
+              <div v-if="item.postedBy">
+                <h5 class="">{{ item.postedBy.name }}</h5>
+
+                <p class="name">
+                  {{ item.postedBy.nationality }} {{ item.postedBy.city }}
+                </p>
+              </div>
             </div>
           </div>
-          <img :src="item.pic" class="card-img-top" alt="..." />
+          <img :src="item.photo" class="card-img-top" alt="..." />
           <div class="icons">
             <i class="fas fa-heart"></i>
             <i class="fas fa-comment"></i>
             <i class="fab fa-telegram-plane"></i>
           </div>
           <div class="card-body">
-            <span class="card-title"
-              >liked by <b>{{ item.liked }}and {{ item.total }} others</b>
+            <span class="card-title" v-if="item.like"
+              >liked by
+              <b>{{ item.liked.length }}and {{ item.total }} others</b>
             </span>
             <blockquote class="card-text">
-              <q> {{ item.title }}</q>
+              <q> {{ item.body }}</q>
               <br />
-              <small class="text-muted">{{ item.updated }}</small>
+              <small class="text-muted">{{
+                moment(item.createdAt).fromNow()
+              }}</small>
             </blockquote>
           </div>
         </div>
@@ -37,10 +52,21 @@
 </template>
 
 <script>
+import moment from "moment";
 export default {
   props: ["items"],
+
   data() {
     return {};
+  },
+  // mathods: {
+  //   dateTime(value) {
+  //     return moment(value).format("dddd");
+  //   },
+  // },
+
+  created: function() {
+    this.moment = moment;
   },
 };
 </script>

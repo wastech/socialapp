@@ -10,4 +10,7 @@ export default {
   createPost(post) {
     return Api().post("createpost", post);
   },
+  allpost() {
+    return Api().get("allpost");
+  },
 };
