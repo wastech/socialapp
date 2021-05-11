@@ -11,13 +11,20 @@
           id="exampleFormControlTextarea1"
           placeholder="what's in your mind? && click on photo icon to select the image"
           rows="4"
+          v-model="body"
         ></textarea>
       </div>
       <section>
         <div class="icons">
           <div class="d-flex justify-content-between">
             <div>
-              <input id="fileUpload" type="file" hidden />
+              <input
+                id="fileUpload"
+                type="file"
+                ref="file"
+                @change="onSelect()"
+                hidden
+              />
               <span
                 type="file"
                 class="material-icons tomato"
@@ -26,6 +33,7 @@
                 perm_media
               </span>
             </div>
+
             <div>
               <span class="material-icons blue">
                 label
@@ -42,7 +50,9 @@
               </span>
             </div>
             <div>
-              <button type="button" class="btn btn-success">Share</button>
+              <button type="button" class="btn btn-success" @click="onSubmit()">
+                Share
+              </button>
             </div>
           </div>
         </div>
@@ -51,10 +61,38 @@
   </div>
 </template>
 <script>
+import postService from "@/services/postService";
 export default {
+  components: {},
+  data() {
+    return {
+      file: "",
+      body: "",
+    };
+  },
   methods: {
     chooseFiles: function() {
       document.getElementById("fileUpload").click();
+    },
+    onSelect() {
+      this.file = this.$refs.file.files[0];
+    },
+    async onSubmit() {
+      try {
+        let formData = new FormData();
+        formData.append("photo", this.file);
+        formData.append("body", this.body);
+        await postService.createPost(formData).then((response) => {
+          this.$toast.success(response.data.message, {
+            position: "top",
+          });
+          console.log("response", response.data.message);
+        });
+      } catch (error) {
+        this.$toast.error(error.response.data.error, {
+          position: "top",
+        });
+      }
     },
   },
 };

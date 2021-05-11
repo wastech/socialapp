@@ -2,10 +2,6 @@ const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema.Types;
 const postSchema = new mongoose.Schema(
   {
-    title: {
-      type: String,
-      required: true,
-    },
     body: {
       type: String,
       required: true,
@@ -13,6 +9,7 @@ const postSchema = new mongoose.Schema(
     photo: {
       type: String,
       required: true,
+      message: "{photo} is required",
     },
     likes: [{ type: ObjectId, ref: "User" }],
     comments: [

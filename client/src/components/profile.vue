@@ -54,18 +54,17 @@
         create Post
       </button>
     </div>
-    <!-- Modal -->
     <div
       class="modal fade"
       id="exampleModal"
       tabindex="-1"
-      aria-labelledby="exampleModalLabel"
+      aria-labelledby="exampleModal"
       aria-hidden="true"
     >
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">update</h5>
+            <h5 class="modal-title" id="exampleModal">update</h5>
             <button
               type="button"
               class="btn-close"
@@ -74,7 +73,32 @@
             ></button>
           </div>
           <div class="modal-body">
-            <createPost />
+            <create-post />
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--update modal dialog-->
+    <div
+      class="modal fade"
+      id="picupdate"
+      tabindex="-1"
+      aria-labelledby="picupdate"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="picupdate">update</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <modal />
           </div>
         </div>
       </div>
@@ -85,12 +109,14 @@
 import story from "@/components/story";
 import { mapState } from "vuex";
 import postService from "@/services/postService";
-import createPost from "@/components/createPost";
+import modal from "@/components/modal";
+import CreatePost from "./createPost.vue";
 
 export default {
   components: {
     story,
-    createPost,
+    modal,
+    CreatePost,
   },
   data() {
     return {

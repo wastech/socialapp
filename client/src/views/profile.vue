@@ -3,7 +3,7 @@
     <div class=" bg">
       <div class="image">
         <img :src="post.pic" alt="" />
-        <h2 class="title">{{post.fullName}}</h2>
+        <h2 class="title">{{ post.fullName }}</h2>
       </div>
     </div>
     <!-- Button trigger modal -->
@@ -20,7 +20,7 @@
 
     <div class="row ">
       <div class="  col-sm-12 col-md-8 col-lg-10 col-xl-9">
-        <userPost  />
+        <userPost />
       </div>
 
       <div class="col-sm-12 col-md-4 col-lg-2 col-xl-3">
@@ -51,9 +51,7 @@
           <div class="modal-body">
             <createPost />
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Post</button>
-          </div>
+          <div class="modal-footer"></div>
         </div>
       </div>
     </div>

@@ -7,4 +7,7 @@ export default {
   postpic(update) {
     return Api().put("updatepic", update);
   },
+  createPost(post) {
+    return Api().post("createpost", post);
+  },
 };
