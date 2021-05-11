@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container mt-2">
     <div class="card mb-3">
       <div class="row g-0">
         <div class="col-md-12 col-xl-4 col-lg-12 col-sm-12 col-xs-12">
@@ -21,7 +21,13 @@
                 <h2 class="mt-0">wastech</h2>
               </div>
             </div>
-
+            <p>
+              Another instance of placeholder content for this other Another
+              instance of placeholder content for thi Another instance of
+              placeholder content for thi Another instance of placeholder
+              content for thi Another instance of placeholder content for this other Another
+              instance o
+            </p>
             <section>
               <div class="scrollable">
                 <!-- comment box-->
@@ -103,7 +109,7 @@ h2 {
   overflow-x: hidden;
   overflow-y: auto;
   text-align: justify;
-  height: 55vh;
+  height: 40vh;
 }
 .commentuser {
   width: 50px;
