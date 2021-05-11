@@ -32,7 +32,7 @@
       </div>
     </div>
     <div class="fullname">
-      <h3>{{ post.fullName}}</h3>
+      <h3>{{ post.fullName }}</h3>
     </div>
     <div class="description">
       <p>
@@ -57,7 +57,7 @@
     <!-- Modal -->
     <div
       class="modal fade"
-      id="picupdate"
+      id="exampleModal"
       tabindex="-1"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
@@ -74,7 +74,7 @@
             ></button>
           </div>
           <div class="modal-body">
-            <modal />
+            <createPost />
           </div>
         </div>
       </div>
@@ -85,12 +85,12 @@
 import story from "@/components/story";
 import { mapState } from "vuex";
 import postService from "@/services/postService";
-import modal from "@/components/modal";
+import createPost from "@/components/createPost";
 
 export default {
   components: {
     story,
-    modal,
+    createPost,
   },
   data() {
     return {
