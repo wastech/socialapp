@@ -20,7 +20,7 @@
 
     <div class="row ">
       <div class="  col-sm-12 col-md-8 col-lg-10 col-xl-9">
-        <userPost />
+        <userPost :items="items" />
       </div>
 
       <div class="col-sm-12 col-md-4 col-lg-2 col-xl-3">
@@ -69,12 +69,13 @@ export default {
   data() {
     return {
       post: {},
+      items: [],
     };
   },
   methods: {
     async getPosts() {
       try {
-        await postService.mypost().then((response) => {
+        await postService.me().then((response) => {
           this.post = response.data;
           this.post_length = response.data;
           this.followers = response.data.followers.length;
@@ -84,9 +85,20 @@ export default {
         console.log(err);
       }
     },
+    async myPost() {
+      try {
+        await postService.mypost().then((response) => {
+          this.items = response.data.mypost;
+          console.log(this.items);
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
   async mounted() {
     this.getPosts();
+    this.myPost();
   },
 };
 </script>

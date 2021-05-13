@@ -18,8 +18,14 @@
 
             <div>
               <div v-if="item.postedBy">
-                <h5 class="">{{ item.postedBy.name }}</h5>
-
+                <router-link
+                  v-bind:to="{
+                    name: 'showuser',
+                    params: { id: item.postedBy._id },
+                  }"
+                >
+                  <h5 class="">{{ item.postedBy.name }}</h5>
+                </router-link>
                 <p class="name">
                   {{ item.postedBy.nationality }} {{ item.postedBy.city }}
                 </p>
@@ -126,5 +132,9 @@ q {
 }
 .card-body {
   margin-top: -13px;
+}
+a {
+  color: #000;
+  text-decoration: none;
 }
 </style>

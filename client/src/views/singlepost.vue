@@ -58,6 +58,7 @@
                         class="form-control"
                         placeholder="Leave a comment here"
                         id="floatingTextarea2"
+                        rows="2"
                       ></textarea>
                       <label for="floatingTextarea2">Comments</label>
                     </div>

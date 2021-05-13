@@ -17,11 +17,6 @@ const routes = [
     name: "singlepost",
     component: () => import("../views/singlepost.vue"),
   },
-  {
-    path: "/friendprofile",
-    name: "friendProfile",
-    component: () => import("../views/friendProfile.vue"),
-  },
 
   {
     path: "/signup",
@@ -32,6 +27,11 @@ const routes = [
     path: "/login",
     name: "login",
     component: () => import("../views/login.vue"),
+  },
+  {
+    path: "/p/:id",
+    name: "showuser",
+    component: () => import("../views/friendProfile.vue"),
   },
 ];
 

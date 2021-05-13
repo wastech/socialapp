@@ -1,13 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose").set("debug", true);
 const requireLogin = require("../middleware/requireLogin");
-const Post = mongoose.model("Post");
-const User = mongoose.model("User");
+// const Post = mongoose.model("Post");
+//const User = mongoose.model("User");
+const Post = require("../models/post");
+const User = require("../models/user");
 const uploader = require("../config/cloudinary");
 
 router.get("/user/:id", requireLogin, (req, res) => {
-  User.findOne({ _id: req.params.id })
+  User.findById({ _id: req.params.id })
     .select("-password")
     .then((user) => {
       Post.find({ postedBy: req.params.id })
@@ -23,6 +25,25 @@ router.get("/user/:id", requireLogin, (req, res) => {
       return res.status(404).json({ error: "User not found" });
     });
 });
+// router.get("/user/:id", requireLogin, async (req, res) => {
+//   console.log(req.params.id);
+//   try {
+   
+//     const user = await User.findById({
+//       _id: req.params.id,
+//     }).exec();
+
+//     res.status(200).json({
+//       success: true,
+//       user,
+//     });
+//   } catch (error) {
+//     res.status(500).json({
+//       success: false,
+//       message: error.message,
+//     });
+//   }
+// });
 
 router.get("/me", requireLogin, (req, res) => {
   User.findById({ _id: req.user._id })

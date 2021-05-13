@@ -130,7 +130,7 @@ export default {
   methods: {
     async getPosts() {
       try {
-        await postService.mypost().then((response) => {
+        await postService.me().then((response) => {
           this.post = response.data;
           this.post_length = response.data;
           this.followers = response.data.followers.length;

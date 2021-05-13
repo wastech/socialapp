@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const mongoose = require("mongoose");
 const requireLogin = require("../middleware/requireLogin");
-const Post = mongoose.model("Post");
+
+const Post = require("../models/post");
+const User = require("../models/user");
 const uploader = require("../config/cloudinary");
 
 router.get("/allpost", requireLogin, (req, res) => {
@@ -67,7 +68,6 @@ router.get("/mypost", requireLogin, (req, res) => {
     .populate("postedBy")
     .then((mypost) => {
       res.json({ mypost });
-      console.log(mypost);
     })
     .catch((err) => {
       console.log(err);

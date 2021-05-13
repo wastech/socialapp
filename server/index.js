@@ -12,6 +12,7 @@ mongoose.connect(MONGOURI, {
   useUnifiedTopology: true,
   useCreateIndex: true,
   useFindAndModify: false,
+  
 });
 mongoose.connection.on("connected", () => {
   console.log("conneted to mongo yeahh");

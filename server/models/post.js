@@ -1,6 +1,7 @@
-const mongoose = require("mongoose");
-const { ObjectId } = mongoose.Schema.Types;
-const postSchema = new mongoose.Schema(
+var mongoose = require("mongoose");
+var Schema = mongoose.Schema;
+
+const postSchema = new Schema(
   {
     body: {
       type: String,
@@ -9,21 +10,21 @@ const postSchema = new mongoose.Schema(
     photo: {
       type: String,
       required: true,
-      message: "{photo} is required",
     },
-    likes: [{ type: ObjectId, ref: "User" }],
+    likes: [{ type: Schema.Types.ObjectId, ref: "User" }],
     comments: [
       {
         text: String,
-        postedBy: { type: ObjectId, ref: "User" },
+        postedBy: { type: Schema.Types.ObjectId, ref: "User" },
       },
     ],
     postedBy: {
-      type: ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "User",
     },
   },
   { timestamps: true }
 );
 
-mongoose.model("Post", postSchema);
+var Post = mongoose.model("Post", postSchema);
+module.exports = Post;

@@ -13,4 +13,7 @@ export default {
   update(update) {
     return Api().put("updatepic", update);
   },
+  singleuser(postId) {
+    return Api().get(`user/${postId}`);
+  },
 };

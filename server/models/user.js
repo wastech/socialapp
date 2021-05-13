@@ -1,6 +1,7 @@
-const mongoose = require("mongoose");
-const { ObjectId } = mongoose.Schema.Types;
-const userSchema = new mongoose.Schema({
+var mongoose = require("mongoose");
+var Schema = mongoose.Schema;
+
+var userSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -21,9 +22,9 @@ const userSchema = new mongoose.Schema({
     default:
       "https://image.shutterstock.com/image-photo/head-shoulders-portrait-young-african-260nw-388588540.jpg",
   },
-  followers: [{ type: ObjectId, ref: "User" }],
-  following: [{ type: ObjectId, ref: "User" }],
-  following: [{ type: ObjectId, ref: "Post" }],
+  followers: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  following: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  following: [{ type: Schema.Types.ObjectId, ref: "Post" }],
   nationality: {
     type: String,
   },
@@ -41,4 +42,5 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-mongoose.model("User", userSchema);
+var User = mongoose.model("User", userSchema);
+module.exports = User;

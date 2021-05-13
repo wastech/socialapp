@@ -1,7 +1,7 @@
 import Api from "@/services/Api";
 
 export default {
-  mypost() {
+  me() {
     return Api().get("me");
   },
   postpic(update) {
@@ -13,4 +13,8 @@ export default {
   allpost() {
     return Api().get("allpost");
   },
+  mypost() {
+    return Api().get("mypost");
+  },
+ 
 };

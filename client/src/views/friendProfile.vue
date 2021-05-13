@@ -1,12 +1,9 @@
 <template>
   <div class="container mt-3">
     <div class=" bg">
-      <div class="image">
-        <img
-          src="https://static.remove.bg/remove-bg-web/2a274ebbb5879d870a69caae33d94388a88e0e35/assets/start-0e837dcc57769db2306d8d659f53555feb500b3c5d456879b9c843d1872e7baa.jpg"
-          alt=""
-        />
-        <h2 class="title">aremu aremu</h2>
+      <div class="image" >
+        <img :src="item.pic" alt="" />
+        <h2 class="title">{{item.email}}</h2>
       </div>
       <div class="d-flex justify-content-between">
         <div>
@@ -40,12 +37,36 @@
 </template>
 
 <script>
+import AuthenticationService from "@/services/AuthenticationService";
 import friendPost from "@/components/friendPost.vue";
 import friendInfo from "@/components/friendInfo.vue";
 import friendFollower from "@/components/friendFollower.vue";
 
 export default {
   components: { friendPost, friendInfo, friendFollower },
+  data() {
+    return {
+      _id: this.$route.params.id,
+      item: {},
+    };
+  },
+  methods: {
+    async getuser() {
+      try {
+        await AuthenticationService.singleuser(this._id).then((response) => {
+          this.item = response.data.user;
+
+          console.log(response.data.user);
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    },
+  },
+  async mounted() {
+    // this.getReviews();
+    this.getuser();
+  },
 };
 </script>
 <style scoped>
@@ -84,9 +105,8 @@ h6 {
   line-height: 1.2;
 }
 
-.d-flex{
+.d-flex {
   max-width: 40%;
   margin: 0 auto;
- 
 }
 </style>
