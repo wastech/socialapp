@@ -13,6 +13,8 @@
                 :src="item.postedBy.pic"
                 class="flex-shrink-0 me-3"
                 alt="..."
+                loading="lazy"
+                
               />
             </div>
 
@@ -32,25 +34,32 @@
               </div>
             </div>
           </div>
-          <img :src="item.photo" class="card-img-top" alt="..." />
-          <div class="icons">
-            <i class="fas fa-heart"></i>
-            <i class="fas fa-comment"></i>
-            <i class="fab fa-telegram-plane"></i>
-          </div>
-          <div class="card-body">
-            <span class="card-title" v-if="item.like"
-              >liked by
-              <b>{{ item.liked.length }}and {{ item.total }} others</b>
-            </span>
-            <blockquote class="card-text">
-              <q> {{ item.body }}</q>
-              <br />
-              <small class="text-muted">{{
-                moment(item.createdAt).fromNow()
-              }}</small>
-            </blockquote>
-          </div>
+          <router-link
+            v-bind:to="{
+              name: 'singlepost',
+              params: { id: item._id },
+            }"
+          >
+            <img :src="item.photo"  loading="lazy" class="card-img-top" alt="..." />
+            <div class="icons">
+              <i class="fas fa-heart"></i>
+              <i class="fas fa-comment"></i>
+              <i class="fab fa-telegram-plane"></i>
+            </div>
+            <div class="card-body">
+              <span class="card-title" v-if="item.like"
+                >liked by
+                <b>{{ item.liked.length }}and {{ item.total }} others</b>
+              </span>
+              <blockquote class="card-text">
+                <q> {{ item.body }}</q>
+                <br />
+                <small class="text-muted">{{
+                  moment(item.createdAt).fromNow()
+                }}</small>
+              </blockquote>
+            </div>
+          </router-link>
         </div>
       </div>
     </div>
@@ -83,6 +92,7 @@ export default {
   width: 50px;
   border-radius: 50%;
   margin-top: 1em;
+  margin-bottom: 1em;
   margin-left: 1em;
   object-fit: cover;
 }

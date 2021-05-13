@@ -60,7 +60,7 @@ export default {
           this.items = response.data.posts;
           this.cnt = response.data.posts.length;
 
-          console.log(response.data);
+         
         });
       } catch (err) {
         console.log(err);

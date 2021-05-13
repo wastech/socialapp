@@ -101,7 +101,7 @@ router.put("/unfollow", requireLogin, (req, res) => {
 
 router.put("/updatepic", uploader.single("pic"), requireLogin, (req, res) => {
   const pic = req.file.path;
-  console.log(req.file);
+  
   User.findByIdAndUpdate(
     req.user._id,
     { $set: { pic } },

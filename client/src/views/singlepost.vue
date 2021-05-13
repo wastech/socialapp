@@ -3,30 +3,22 @@
     <div class="card mb-3">
       <div class="row g-0">
         <div class="col-md-12 col-xl-4 col-lg-12 col-sm-12 col-xs-12">
-          <img
-            src="https://res.cloudinary.com/wastech/image/upload/v1620720680/hxd69gynmdkh5ob4byrc.jpg"
-            alt="..."
-            class="img"
-          />
+          <img :src="item.photo" alt="..." class="img" />
         </div>
         <div class="col-md-12 col-xl-8 col-lg-12 col-sm-12 col-xs-12">
           <div class="card-body">
-            <div class="d-flex position-relative">
+            <div class="d-flex position-relative" v-if="item.postedBy">
               <img
-                src="https://res.cloudinary.com/wastech/image/upload/v1620720680/hxd69gynmdkh5ob4byrc.jpg"
+                :src="item.postedBy.pic"
                 class="flex-shrink-0 me-3"
                 alt="..."
               />
               <div>
-                <h2 class="mt-0">wastech</h2>
+                <h2 class="mt-0">{{ item.postedBy.name }}</h2>
               </div>
             </div>
             <p>
-              Another instance of placeholder content for this other Another
-              instance of placeholder content for thi Another instance of
-              placeholder content for thi Another instance of placeholder
-              content for thi Another instance of placeholder content for this other Another
-              instance o
+              {{ item.body }}
             </p>
             <section>
               <div class="scrollable">
@@ -58,13 +50,20 @@
                         class="form-control"
                         placeholder="Leave a comment here"
                         id="floatingTextarea2"
+                        v-model="text"
                         rows="2"
                       ></textarea>
                       <label for="floatingTextarea2">Comments</label>
                     </div>
                   </div>
                   <div class="col-4">
-                    <button type="button" class="btn btn-success">Post</button>
+                    <button
+                      type="button"
+                      class="btn btn-success"
+                      @click="onSubmit()"
+                    >
+                      Post
+                    </button>
                   </div>
                 </div>
               </div>
@@ -75,6 +74,60 @@
     </div>
   </div>
 </template>
+<script>
+import postService from "@/services/postService";
+
+export default {
+  data() {
+    return {
+      _id: this.$route.params.id,
+      item: {},
+      text: "",
+    };
+  },
+  methods: {
+    async getPost() {
+      try {
+        await postService.showpost(this._id).then((response) => {
+          this.item = response.data.post;
+
+          console.log(response.data);
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async onSubmit() {
+      const comment = {
+        id: this.item._id,
+        text: this.text,
+      };
+
+      try {
+        await postService.addcomment(comment).then((response) => {
+          console.log("this is response", response);
+          this.$toast.success(response.data.message, {
+            position: "top",
+          });
+          // this.$router.push({
+          //   name: "Home",
+          // });
+        });
+        console.log(response.data);
+      } catch (error) {
+        this.$toast.error(error.response.data.error, {
+          position: "top",
+        });
+        console.log(error);
+      }
+    },
+  },
+  async mounted() {
+    // this.getReviews();
+    this.getPost();
+  },
+};
+</script>
 <style scoped>
 .img {
   width: 100%;

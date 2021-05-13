@@ -74,6 +74,20 @@ router.get("/mypost", requireLogin, (req, res) => {
     });
 });
 
+router.get("/post/:id", requireLogin, (req, res) => {
+  Post.findById({ _id: req.params.id })
+    .populate("postedBy", "_id name pic")
+    .populate("comments.postedBy", "_id name pic")
+    .then((post) => {
+      res.json({ post });
+      console.log(post);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+
 router.put("/like", requireLogin, (req, res) => {
   Post.findByIdAndUpdate(
     req.body.postId,
@@ -110,26 +124,28 @@ router.put("/unlike", requireLogin, (req, res) => {
 });
 
 router.put("/comment", requireLogin, (req, res) => {
+  console.log(" req.body.postId", req.body.id);
   const comment = {
     text: req.body.text,
     postedBy: req.user._id,
   };
   Post.findByIdAndUpdate(
-    req.body.postId,
+    req.body.id,
     {
       $push: { comments: comment },
     },
     {
-      new: true,
+     upsert: true, new: true,
     }
   )
-    .populate("comments.postedBy", "_id name")
-    .populate("postedBy", "_id name")
+    .populate("comments.postedBy", "_id name pic")
+    .populate("postedBy", "_id name pic")
     .exec((err, result) => {
       if (err) {
         return res.status(422).json({ error: err });
       } else {
-        res.json(result);
+        res.json({ result:result,message:"created successfully" });
+        console.log("result", result);
       }
     });
 });

@@ -33,7 +33,6 @@ export default {
       try {
         await postService.allpost().then((response) => {
           this.items = response.data.posts;
-          console.log(response.data);
         });
       } catch (err) {
         console.log(err);
