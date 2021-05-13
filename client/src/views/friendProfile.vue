@@ -1,21 +1,21 @@
 <template>
   <div class="container mt-3">
     <div class=" bg">
-      <div class="image" >
+      <div class="image">
         <img :src="item.pic" alt="" />
-        <h2 class="title">{{item.email}}</h2>
+        <h2 class="title">{{ item.fullName }}</h2>
       </div>
       <div class="d-flex justify-content-between">
         <div>
-          <h5>45</h5>
+          <h5>{{ cnt }}</h5>
           <h6>posts</h6>
         </div>
         <div>
-          <h5>555</h5>
+          <h5 v-if="item.followers">{{ item.followers.length }}</h5>
           <h6>followers</h6>
         </div>
         <div>
-          <h5>44444</h5>
+          <h5 v-if="item.following">{{ item.following.length }}</h5>
           <h6>following</h6>
         </div>
       </div>
@@ -25,11 +25,11 @@
 
     <div class="row ">
       <div class="  col-sm-12 col-md-8 col-lg-10 col-xl-9">
-        <friendPost />
+        <friendPost :items="items" />
       </div>
 
       <div class="col-sm-12 col-md-4 col-lg-2 col-xl-3">
-        <friendInfo />
+        <friendInfo :item="item" />
         <friendFollower />
       </div>
     </div>
@@ -48,6 +48,8 @@ export default {
     return {
       _id: this.$route.params.id,
       item: {},
+      items: [],
+      cnt: "",
     };
   },
   methods: {
@@ -55,8 +57,10 @@ export default {
       try {
         await AuthenticationService.singleuser(this._id).then((response) => {
           this.item = response.data.user;
+          this.items = response.data.posts;
+          this.cnt = response.data.posts.length;
 
-          console.log(response.data.user);
+          console.log(response.data);
         });
       } catch (err) {
         console.log(err);

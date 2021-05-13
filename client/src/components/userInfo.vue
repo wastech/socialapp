@@ -5,9 +5,7 @@
       <div class="info">
         <h5 class="-title"><span> City :</span> {{ post.city }}</h5>
         <h5 class="-title"><span>From : </span> {{ post.nationality }}</h5>
-        <h5 class="-title">
-          <span> Relationship :</span> {{ post.status }}
-        </h5>
+        <h5 class="-title"><span> Relationship :</span> {{ post.status }}</h5>
         <p>
           {{ post.bio }}
         </p>
