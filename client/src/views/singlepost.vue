@@ -2,10 +2,10 @@
   <div class="container mt-2">
     <div class="card mb-3">
       <div class="row g-0">
-        <div class="col-md-12 col-xl-4 col-lg-12 col-sm-12 col-xs-12">
+        <div class="col-md-12 col-xl-4 col-lg-6 col-sm-7 col-xs-12">
           <img :src="item.photo" alt="..." class="img" />
         </div>
-        <div class="col-md-12 col-xl-8 col-lg-12 col-sm-12 col-xs-12">
+        <div class="col-md-12 col-xl-8 col-lg-6 col-sm-12 col-xs-12">
           <div class="card-body">
             <div class="d-flex position-relative" v-if="item.postedBy">
               <img
@@ -23,21 +23,21 @@
             <section>
               <div class="scrollable">
                 <!-- comment box-->
-                <div class="row g-0 bg-light position-relative">
+                <div
+                  class="row g-0 bg-light position-relative"
+                  v-for="comment in comments"
+                  :key="comment.id"
+                >
                   <div class="col-md-2 mb-md-0 p-md-4">
-                    <img
-                      src="https://res.cloudinary.com/wastech/image/upload/v1620720680/hxd69gynmdkh5ob4byrc.jpg"
-                      class="commentuser"
-                      alt="..."
-                    />
+                    <img :src="comment.postedBy.pic" class="commentuser" alt="..." />
                   </div>
                   <div class="col-md-6 p-2 ps-md-0">
-                    <h2 class="mt-0">wastech</h2>
+                    <h2 class="mt-0">{{ comment.postedBy.name }}</h2>
                     <p>
-                      Another instance of placeholder content for this other
+                     {{comment.text}}
                     </p>
                     <small class="card-footer text-muted">
-                      2 days ago
+                     1 minute ago
                     </small>
                   </div>
                 </div>
@@ -83,6 +83,7 @@ export default {
       _id: this.$route.params.id,
       item: {},
       text: "",
+      comments: [],
     };
   },
   methods: {
@@ -90,6 +91,7 @@ export default {
       try {
         await postService.showpost(this._id).then((response) => {
           this.item = response.data.post;
+          this.comments = response.data.post.comments;
 
           console.log(response.data);
         });
@@ -112,6 +114,7 @@ export default {
           // this.$router.push({
           //   name: "Home",
           // });
+          this.getPost();
         });
         console.log(response.data);
       } catch (error) {

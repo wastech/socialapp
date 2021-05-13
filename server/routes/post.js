@@ -80,13 +80,11 @@ router.get("/post/:id", requireLogin, (req, res) => {
     .populate("comments.postedBy", "_id name pic")
     .then((post) => {
       res.json({ post });
-      console.log(post);
     })
     .catch((err) => {
       console.log(err);
     });
 });
-
 
 router.put("/like", requireLogin, (req, res) => {
   Post.findByIdAndUpdate(
@@ -124,7 +122,6 @@ router.put("/unlike", requireLogin, (req, res) => {
 });
 
 router.put("/comment", requireLogin, (req, res) => {
-  console.log(" req.body.postId", req.body.id);
   const comment = {
     text: req.body.text,
     postedBy: req.user._id,
@@ -135,7 +132,8 @@ router.put("/comment", requireLogin, (req, res) => {
       $push: { comments: comment },
     },
     {
-     upsert: true, new: true,
+      // upsert: true,
+      new: true,
     }
   )
     .populate("comments.postedBy", "_id name pic")
@@ -144,8 +142,7 @@ router.put("/comment", requireLogin, (req, res) => {
       if (err) {
         return res.status(422).json({ error: err });
       } else {
-        res.json({ result:result,message:"created successfully" });
-        console.log("result", result);
+        res.json({ result: result, message: "created successfully" });
       }
     });
 });
