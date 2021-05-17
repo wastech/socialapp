@@ -4,6 +4,9 @@ export default {
   register(credentials) {
     return Api().post("signup", credentials);
   },
+  query(query) {
+    return Api().post("search-users", query);
+  },
   login(credentials) {
     return Api().post("signin", credentials);
   },

@@ -37,68 +37,107 @@ router.get("/me", requireLogin, (req, res) => {
       res.status(200).json(user);
     });
 });
+router.put("/:id/follow", async (req, res) => {
+  if (req.body.userId !== req.params.id) {
+    try {
+      const user = await User.findById(req.params.id);
+      const currentUser = await User.findById(req.body.userId);
+      if (!user.followers.includes(req.body.userId)) {
+        await user.updateOne({ $push: { followers: req.body.userId } });
+        await currentUser.updateOne({ $push: { followings: req.params.id } });
+        res.status(200).json("user has been followed");
+      } else {
+        res.status(403).json("you allready follow this user");
+      }
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  } else {
+    res.status(403).json("you cant follow yourself");
+  }
+});
 
-router.put("/follow", requireLogin, (req, res) => {
-  
-  User.findByIdAndUpdate(
-    req.body.followId,
-    {
-      $push: { followers: req.user._id },
-    },
-    {
-      new: true,
-    },
-    (err, result) => {
-      if (err) {
-        return res.status(422).json({ error: err });
+// router.put("/follow", requireLogin, (req, res) => {
+//   User.findByIdAndUpdate(
+//     req.body.followId,
+//     {
+//       $push: { followers: req.user._id },
+//     },
+//     {
+//       new: true,
+//     },
+//     (err, result) => {
+//       if (err) {
+//         return res.status(422).json({ error: err });
+//       }
+//       User.findByIdAndUpdate(
+//         req.user._id,
+//         {
+//           $push: { following: req.body.followId },
+//         },
+//         { new: true }
+//       )
+//         .select("-password")
+//         .then((result) => {
+//           res.json({ result });
+//         })
+//         .catch((err) => {
+//           return res.status(422).json({ error: err });
+//         });
+//     }
+//   );
+// });
+//unfollow a user
+
+router.put("/:id/unfollow", async (req, res) => {
+  if (req.body.userId !== req.params.id) {
+    try {
+      const user = await User.findById(req.params.id);
+      const currentUser = await User.findById(req.body.userId);
+      if (user.followers.includes(req.body.userId)) {
+        await user.updateOne({ $pull: { followers: req.body.userId } });
+        await currentUser.updateOne({ $pull: { followings: req.params.id } });
+        res.status(200).json("user has been unfollowed");
+      } else {
+        res.status(403).json("you dont follow this user");
       }
-      User.findByIdAndUpdate(
-        req.user._id,
-        {
-          $push: { following: req.body.followId },
-        },
-        { new: true }
-      )
-        .select("-password")
-        .then((result) => {
-          res.json({ result });
-        })
-        .catch((err) => {
-          return res.status(422).json({ error: err });
-        });
+    } catch (err) {
+      res.status(500).json(err);
     }
-  );
+  } else {
+    res.status(403).json("you cant unfollow yourself");
+  }
 });
-router.put("/unfollow", requireLogin, (req, res) => {
-  User.findByIdAndUpdate(
-    req.body.unfollowId,
-    {
-      $pull: { followers: req.user._id },
-    },
-    {
-      new: true,
-    },
-    (err, result) => {
-      if (err) {
-        return res.status(422).json({ error: err });
-      }
-      User.findByIdAndUpdate(
-        req.user._id,
-        {
-          $pull: { following: req.body.unfollowId },
-        },
-        { new: true }
-      )
-        .select("-password")
-        .then((result) => {
-          res.json(result);
-        })
-        .catch((err) => {
-          return res.status(422).json({ error: err });
-        });
-    }
-  );
-});
+// router.put("/unfollow", requireLogin, (req, res) => {
+//   User.findByIdAndUpdate(
+//     req.body.unfollowId,
+//     {
+//       $pull: { followers: req.user._id },
+//     },
+//     {
+//       new: true,
+//     },
+//     (err, result) => {
+//       if (err) {
+//         return res.status(422).json({ error: err });
+//       }
+//       User.findByIdAndUpdate(
+//         req.user._id,
+//         {
+//           $pull: { following: req.body.unfollowId },
+//         },
+//         { new: true }
+//       )
+//         .select("-password")
+//         .then((result) => {
+//           res.json(result);
+//         })
+//         .catch((err) => {
+//           return res.status(422).json({ error: err });
+//         });
+//     }
+//   );
+// });
 
 router.put("/updatepic", uploader.single("pic"), requireLogin, (req, res) => {
   const pic = req.file.path;
@@ -117,7 +156,8 @@ router.put("/updatepic", uploader.single("pic"), requireLogin, (req, res) => {
 });
 
 router.post("/search-users", (req, res) => {
-  let userPattern = new RegExp("^" + req.body.query);
+  let userPattern = new RegExp("^" ,req.body.email);
+  console.log("userPattern", userPattern);
   User.find({ email: { $regex: userPattern } })
     .select("_id email")
     .then((user) => {
