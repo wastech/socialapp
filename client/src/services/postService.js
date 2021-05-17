@@ -13,9 +13,9 @@ export default {
   addcomment(comment) {
     return Api().put("comment", comment);
   },
-  allpost() {
-    return Api().get("allpost");
-  },
+  // allpost() {
+  //   return Api().get("allpost");
+  // },
   mypost() {
     return Api().get("mypost");
   },

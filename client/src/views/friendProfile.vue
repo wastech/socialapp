@@ -29,7 +29,31 @@
       </div>
 
       <div class="col-sm-12 col-md-4 col-lg-2 col-xl-3">
-        <friendInfo :item="item" />
+        <div class="main">
+          <button type="button" class="btn btn-primary btn-sm" @click="follow">
+            Follow =+
+          </button>
+          <button type="button" class="btn btn-primary btn-sm">
+            Unfollow -
+          </button>
+          <div class="title">
+            <h2 class="H2">user information</h2>
+            <div class="info">
+              <h5 class="-title">
+                <span class="SPAN"> City :</span> {{ item.city }}
+              </h5>
+              <h5 class="-title">
+                <span class="SPAN">From : </span> {{ item.nationality }}
+              </h5>
+              <h5 class="-title">
+                <span class="SPAN"> Relationship :</span> {{ item.status }}
+              </h5>
+              <p>
+                {{ item.bio }}
+              </p>
+            </div>
+          </div>
+        </div>
         <friendFollower />
       </div>
     </div>
@@ -41,6 +65,7 @@ import AuthenticationService from "@/services/AuthenticationService";
 import friendPost from "@/components/friendPost.vue";
 import friendInfo from "@/components/friendInfo.vue";
 import friendFollower from "@/components/friendFollower.vue";
+import { mapState } from "vuex";
 
 export default {
   components: { friendPost, friendInfo, friendFollower },
@@ -59,11 +84,31 @@ export default {
           this.item = response.data.user;
           this.items = response.data.posts;
           this.cnt = response.data.posts.length;
-
-         
         });
       } catch (err) {
         console.log(err);
+      }
+    },
+    async follow() {
+      try {
+        await AuthenticationService.follow(
+          this._id,
+        ).then((response) => {
+          console.log("this is response", this.$store.state.user._id);
+          this.$toast.success(response.data.message, {
+            position: "top",
+          });
+          // this.$router.push({
+          //   name: "Home",
+          // });
+          //  this.getPost();
+        });
+        // console.log(this.id);
+      } catch (error) {
+        this.$toast.error(error.response.data.error, {
+          position: "top",
+        });
+        console.log(error);
       }
     },
   },
@@ -112,5 +157,21 @@ h6 {
 .d-flex {
   max-width: 40%;
   margin: 0 auto;
+}
+/**user info */
+.main {
+  margin-top: 16em;
+}
+.H2 {
+  font-size: x-large;
+  font-weight: 900;
+}
+.SPAN {
+  font-weight: 600;
+  margin-right: 0.5em;
+}
+p {
+  text-align: justify;
+  margin-top: 1em;
 }
 </style>

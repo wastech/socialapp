@@ -16,4 +16,7 @@ export default {
   singleuser(postId) {
     return Api().get(`user/${postId}`);
   },
+  follow(follow) {
+    return Api().put("follow", follow);
+  },
 };

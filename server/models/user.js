@@ -24,7 +24,7 @@ var userSchema = new Schema({
   },
   followers: [{ type: Schema.Types.ObjectId, ref: "User" }],
   following: [{ type: Schema.Types.ObjectId, ref: "User" }],
-  following: [{ type: Schema.Types.ObjectId, ref: "Post" }],
+  
   nationality: {
     type: String,
   },

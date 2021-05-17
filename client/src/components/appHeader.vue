@@ -3,7 +3,7 @@
     <div class="d-flex justify-content-between">
       <div class="__instagram">
         <div class="">
-          <i class="fab fa-instagram"></i> <small>instagram</small>
+          <i class="fab fa-instagram"></i> <small>Wastech</small>
         </div>
       </div>
       <div class="searchBar">

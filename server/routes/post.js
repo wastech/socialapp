@@ -6,17 +6,32 @@ const Post = require("../models/post");
 const User = require("../models/user");
 const uploader = require("../config/cloudinary");
 
-router.get("/allpost", requireLogin, (req, res) => {
-  Post.find()
-    .populate("postedBy", "_id name pic nationality cite")
-    .populate("comments.postedBy", "_id name")
-    .sort("-createdAt")
-    .then((posts) => {
-      res.json({ posts });
-    })
-    .catch((err) => {
-      console.log(err);
+router.get("/allpost", requireLogin, async (req, res) => {
+  try {
+    let pagination = 9;
+    const page = req.query.page ? parseInt(req.query.page) : 1;
+    const count = await Post.find({}).countDocuments();
+    let posts = await Post.find({}) // TODO: Paginate
+      .populate("postedBy", "_id name pic nationality city")
+      .populate("comments.postedBy", "_id name")
+      .sort("-createdAt")
+      .skip((page - 1) * pagination) // in the first page the value of the skip is 0
+      .limit(pagination);
+    // output just 9 items
+    res.json({
+      count: count,
+      current_page: page,
+      posts,
+      last_page: Math.ceil(count / pagination),
+      per_page: req.query.pagination,
+      // TODO: Plural
     });
+  } catch (err) {
+    res.status(400).json({
+      success: false, // TODO: Not needed when you use the correct status codes
+      message: err.message,
+    });
+  }
 });
 
 router.get("/getsubpost", requireLogin, (req, res) => {

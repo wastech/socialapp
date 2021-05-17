@@ -39,6 +39,7 @@ router.get("/me", requireLogin, (req, res) => {
 });
 
 router.put("/follow", requireLogin, (req, res) => {
+  
   User.findByIdAndUpdate(
     req.body.followId,
     {
@@ -60,7 +61,7 @@ router.put("/follow", requireLogin, (req, res) => {
       )
         .select("-password")
         .then((result) => {
-          res.json(result);
+          res.json({ result });
         })
         .catch((err) => {
           return res.status(422).json({ error: err });
@@ -101,7 +102,7 @@ router.put("/unfollow", requireLogin, (req, res) => {
 
 router.put("/updatepic", uploader.single("pic"), requireLogin, (req, res) => {
   const pic = req.file.path;
-  
+
   User.findByIdAndUpdate(
     req.user._id,
     { $set: { pic } },
