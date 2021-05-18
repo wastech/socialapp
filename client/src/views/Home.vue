@@ -97,7 +97,7 @@ export default {
       }
     },
   },
-  async mounted() {
+   mounted() {
     this.getPosts();
   },
 };

@@ -34,7 +34,7 @@
             type="button"
             class="btn btn-primary btn-sm"
             @click="follow()"
-            :class="{ display: followed }"
+            :disabled="disableButton"
           >
             Follow =+
           </button>
@@ -87,7 +87,8 @@ export default {
       items: [],
       followers: [],
       cnt: "",
-      display:false
+      disableButton:false
+    
     };
   },
   methods: {
@@ -128,7 +129,7 @@ export default {
 
           this.getuser();
           this.friends();
-          this.display=true
+            disableButton=true
         });
         // console.log(this.id);
       } catch (error) {
@@ -164,7 +165,7 @@ export default {
     },
   },
 
-  async mounted() {
+   mounted() {
     // this.getReviews();
     this.getuser();
     this.friends();
