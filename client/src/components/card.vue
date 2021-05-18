@@ -14,7 +14,6 @@
                 class="flex-shrink-0 me-3"
                 alt="..."
                 loading="lazy"
-                
               />
             </div>
 
@@ -40,7 +39,12 @@
               params: { id: item._id },
             }"
           >
-            <img :src="item.photo"  loading="lazy" class="card-img-top" alt="..." />
+            <img
+              :src="item.photo"
+              loading="lazy"
+              class="card-img-top"
+              alt="..."
+            />
             <div class="icons">
               <i class="fas fa-heart"></i>
               <i class="fas fa-comment"></i>

@@ -22,4 +22,9 @@ export default {
   showpost(postId) {
     return Api().get(`post/${postId}`);
   },
+  like(data, userId) {
+    return Api().put(`${data}/like`, {
+      userId,
+    });
+  }
 };

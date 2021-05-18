@@ -17,7 +17,7 @@ router.get("/allpost", requireLogin, async (req, res) => {
       .sort("-createdAt")
       .skip((page - 1) * pagination)
       .limit(pagination);
-    
+
     res.json({
       count: count,
       current_page: page,
@@ -47,16 +47,17 @@ router.get("/getsubpost", requireLogin, (req, res) => {
     });
 });
 
-
 router.put("/:id/like", async (req, res) => {
+  console.log("req.params.id", req.params.id);
+  console.log("req.body.userId", req.body.userId);
   try {
     const post = await Post.findById(req.params.id);
     if (!post.likes.includes(req.body.userId)) {
       await post.updateOne({ $push: { likes: req.body.userId } });
-      res.status(200).json("The post has been liked");
+      res.status(200).json({ message: "The post has been liked" });
     } else {
       await post.updateOne({ $pull: { likes: req.body.userId } });
-      res.status(200).json("The post has been disliked");
+      res.status(200).json({ message: "The post has been disliked" });
     }
   } catch (err) {
     res.status(500).json(err);
@@ -162,7 +163,6 @@ router.put("/comment", requireLogin, (req, res) => {
       $push: { comments: comment },
     },
     {
-     
       new: true,
     }
   )

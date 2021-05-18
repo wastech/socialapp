@@ -20,6 +20,15 @@
             <p>
               {{ item.body }}
             </p>
+            <div class="icons">
+              <i class="fas fa-heart" @click="like()" v-if="item.likes">
+                <span class="badge ">{{ item.likes.length }}</span></i
+              >
+              <i class="fas fa-comment" v-if="item.comments"
+                ><span class="badge ">{{ item.comments.length }}</span></i
+              >
+              <i class="fab fa-telegram-plane"></i>
+            </div>
             <section>
               <div class="scrollable">
                 <!-- comment box-->
@@ -29,15 +38,19 @@
                   :key="comment.id"
                 >
                   <div class="col-md-2 mb-md-0 p-md-4">
-                    <img :src="comment.postedBy.pic" class="commentuser" alt="..." />
+                    <img
+                      :src="comment.postedBy.pic"
+                      class="commentuser"
+                      alt="..."
+                    />
                   </div>
                   <div class="col-md-6 p-2 ps-md-0">
                     <h2 class="mt-0">{{ comment.postedBy.name }}</h2>
                     <p>
-                     {{comment.text}}
+                      {{ comment.text }}
                     </p>
                     <small class="card-footer text-muted">
-                     1 minute ago
+                      1 minute ago
                     </small>
                   </div>
                 </div>
@@ -92,11 +105,26 @@ export default {
         await postService.showpost(this._id).then((response) => {
           this.item = response.data.post;
           this.comments = response.data.post.comments;
-
-          console.log(response.data);
         });
       } catch (err) {
         console.log(err);
+      }
+    },
+    async like() {
+      try {
+        await postService
+          .like(this._id, this.$store.state.user._id)
+          .then((response) => {
+            console.log("this is response", response);
+            this.$toast.success(response.data.message, {
+              position: "top",
+            });
+            this.getPost();
+          });
+      } catch (error) {
+        this.$toast.error(error.response.data.message, {
+          position: "top",
+        });
       }
     },
     async onSubmit() {
@@ -111,9 +139,6 @@ export default {
           this.$toast.success(response.data.message, {
             position: "top",
           });
-          // this.$router.push({
-          //   name: "Home",
-          // });
           this.getPost();
         });
         console.log(response.data);
@@ -126,7 +151,6 @@ export default {
     },
   },
   async mounted() {
-    // this.getReviews();
     this.getPost();
   },
 };
@@ -196,5 +220,16 @@ h2 {
 }
 .comment-box {
   border-top: 1px solid #ccc;
+}
+.fas {
+  margin: 0.5em 1em 0 0.5em;
+}
+.fas,
+.fab {
+  font-size: 1.5em;
+  color: #d8e3e7;
+}
+.badge {
+  color: black;
 }
 </style>
