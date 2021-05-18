@@ -64,7 +64,7 @@
             </div>
           </div>
         </div>
-        <friendFollower />
+        <friendFollower :followers="followers" />
       </div>
     </div>
   </div>
@@ -84,6 +84,7 @@ export default {
       _id: this.$route.params.id,
       item: {},
       items: [],
+      followers: [],
       cnt: "",
     };
   },
@@ -94,6 +95,16 @@ export default {
           this.item = response.data.user;
           this.items = response.data.posts;
           this.cnt = response.data.posts.length;
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async friends() {
+      try {
+        await AuthenticationService.friends(this._id).then((response) => {
+         this.followers =response.data
+          console.log("followers", response.data);
         });
       } catch (err) {
         console.log(err);
@@ -150,6 +161,7 @@ export default {
   async mounted() {
     // this.getReviews();
     this.getuser();
+    this.friends();
   },
 };
 </script>

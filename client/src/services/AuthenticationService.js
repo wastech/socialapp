@@ -19,6 +19,9 @@ export default {
   singleuser(postId) {
     return Api().get(`user/${postId}`);
   },
+  friends(userId) {
+    return Api().get(`friends/${userId}`);
+  },
   follow(data, userId) {
     return Api().put(`${data}/follow`, {
       userId,

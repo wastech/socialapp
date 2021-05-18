@@ -158,6 +158,7 @@ router.get("/friends/:userId", async (req, res) => {
       friendList.push({ _id, name, pic });
     });
     res.status(200).json(friendList);
+    console.log("this is friendList", friendList);
   } catch (err) {
     res.status(500).json(err);
   }
