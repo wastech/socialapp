@@ -144,6 +144,25 @@ router.put("/:id/unfollow", async (req, res) => {
 //   );
 // });
 
+router.get("/friends/:userId", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userId);
+    const friends = await Promise.all(
+      user.followings.map((friendId) => {
+        return User.findById(friendId);
+      })
+    );
+    let friendList = [];
+    friends.map((friend) => {
+      const { _id, name, pic } = friend;
+      friendList.push({ _id, name, pic });
+    });
+    res.status(200).json(friendList);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 router.put("/updatepic", uploader.single("pic"), requireLogin, (req, res) => {
   const pic = req.file.path;
 
