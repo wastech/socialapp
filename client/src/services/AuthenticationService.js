@@ -25,7 +25,7 @@ export default {
     });
   },
   unfollow(data, userId) {
-    return Api().put(`${data}/follow`, {
+    return Api().put(`${data}/unfollow`, {
       userId,
     });
   },

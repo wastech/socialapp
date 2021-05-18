@@ -134,7 +134,7 @@ export default {
           this.post = response.data;
           this.post_length = response.data;
           this.followers = response.data.followers.length;
-          this.followings = response.data.following.length;
+          this.following = response.data.followings.length;
         });
       } catch (err) {
         console.log(err);

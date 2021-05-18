@@ -30,10 +30,18 @@
 
       <div class="col-sm-12 col-md-4 col-lg-2 col-xl-3">
         <div class="main">
-          <button type="button" class="btn btn-primary btn-sm" @click="follow(item._id)">
+          <button
+            type="button"
+            class="btn btn-primary btn-sm"
+            @click="follow()"
+          >
             Follow =+
           </button>
-          <button type="button" class="btn btn-primary btn-sm">
+          <button
+            type="button"
+            class="btn btn-primary btn-sm"
+            @click="unfollow()"
+          >
             Unfollow -
           </button>
           <div class="title">
@@ -50,8 +58,8 @@
               </h5>
               <p>
                 {{ item.bio }}
-                {{$store.state.user._id}}
-                {{$route.params.id}}
+                {{ $store.state.user._id }}
+                {{ $route.params.id }}
               </p>
             </div>
           </div>
@@ -92,11 +100,11 @@ export default {
       }
     },
     async follow() {
-     
       try {
-        
-        await AuthenticationService.follow(this.$store.state.user._id, this._id
-     ).then((response) => {
+        await AuthenticationService.follow(
+          this.$store.state.user._id,
+          this._id
+        ).then((response) => {
           console.log("this is response", response);
           this.$toast.success(response.data.message, {
             position: "top",
@@ -104,7 +112,7 @@ export default {
           // this.$router.push({
           //   name: "Home",
           // });
-          //  this.getPost();
+          this.getuser();
         });
         // console.log(this.id);
       } catch (error) {
@@ -114,20 +122,20 @@ export default {
         console.log(error.response.data);
       }
     },
-     async follow() {
-     
+    async unfollow() {
       try {
-        
-        await AuthenticationService.follow(this.$store.state.user._id, this._id
-     ).then((response) => {
+        await AuthenticationService.unfollow(
+          this.$store.state.user._id,
+          this._id
+        ).then((response) => {
           console.log("this is response", response);
-          this.$toast.success(response.data.message, {
+          this.$toast.success(response.data, {
             position: "top",
           });
           // this.$router.push({
           //   name: "Home",
           // });
-          //  this.getPost();
+          this.getuser();
         });
         // console.log(this.id);
       } catch (error) {
@@ -138,7 +146,7 @@ export default {
       }
     },
   },
-  
+
   async mounted() {
     // this.getReviews();
     this.getuser();
