@@ -19,7 +19,18 @@ export default {
   singleuser(postId) {
     return Api().get(`user/${postId}`);
   },
-  follow(follow) {
-    return Api().put("follow", follow);
+  follow(data, userId) {
+    return Api().put(`${data}/follow`, {
+      userId,
+    });
   },
+  unfollow(data, userId) {
+    return Api().put(`${data}/follow`, {
+      userId,
+    });
+  },
+
+  // follow(follow) {
+  //   return Api().put("follow", follow);
+  // },
 };

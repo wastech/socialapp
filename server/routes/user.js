@@ -37,23 +37,29 @@ router.get("/me", requireLogin, (req, res) => {
       res.status(200).json(user);
     });
 });
-router.put("/:id/follow", async (req, res) => {
+router.put("/:id/follow",requireLogin, async (req, res) => {
+  console.log("req", req.params.id);
+    
   if (req.body.userId !== req.params.id) {
+    console.log("req.body.userId", req.body.userId);
     try {
       const user = await User.findById(req.params.id);
+      
       const currentUser = await User.findById(req.body.userId);
       if (!user.followers.includes(req.body.userId)) {
+      
         await user.updateOne({ $push: { followers: req.body.userId } });
         await currentUser.updateOne({ $push: { followings: req.params.id } });
-        res.status(200).json("user has been followed");
+        res.status(200).json({ message: "user has been followed" });
       } else {
-        res.status(403).json("you allready follow this user");
+        res.status(403).json({ message: "you allready follow this user" });
       }
-    } catch (err) {
-      res.status(500).json(err);
+    } catch (error) {
+      res.status(500).json(error);
+      console.log("err", error);
     }
   } else {
-    res.status(403).json("you cant follow yourself");
+    res.status(403).json({ message: "you cant follow yourself" });
   }
 });
 
@@ -156,7 +162,7 @@ router.put("/updatepic", uploader.single("pic"), requireLogin, (req, res) => {
 });
 
 router.post("/search-users", (req, res) => {
-  let userPattern = new RegExp("^" ,req.body.email);
+  let userPattern = new RegExp("^", req.body.email);
   console.log("userPattern", userPattern);
   User.find({ email: { $regex: userPattern } })
     .select("_id email")

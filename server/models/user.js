@@ -23,8 +23,8 @@ var userSchema = new Schema({
       "https://image.shutterstock.com/image-photo/head-shoulders-portrait-young-african-260nw-388588540.jpg",
   },
   followers: [{ type: Schema.Types.ObjectId, ref: "User" }],
-  following: [{ type: Schema.Types.ObjectId, ref: "User" }],
-  
+  followings: [{ type: Schema.Types.ObjectId, ref: "User" }],
+
   nationality: {
     type: String,
   },

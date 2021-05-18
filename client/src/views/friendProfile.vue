@@ -15,7 +15,7 @@
           <h6>followers</h6>
         </div>
         <div>
-          <h5 v-if="item.following">{{ item.following.length }}</h5>
+          <h5 v-if="item.following">{{ item.followings.length }}</h5>
           <h6>following</h6>
         </div>
       </div>
@@ -30,7 +30,7 @@
 
       <div class="col-sm-12 col-md-4 col-lg-2 col-xl-3">
         <div class="main">
-          <button type="button" class="btn btn-primary btn-sm" @click="follow">
+          <button type="button" class="btn btn-primary btn-sm" @click="follow(item._id)">
             Follow =+
           </button>
           <button type="button" class="btn btn-primary btn-sm">
@@ -50,6 +50,8 @@
               </h5>
               <p>
                 {{ item.bio }}
+                {{$store.state.user._id}}
+                {{$route.params.id}}
               </p>
             </div>
           </div>
@@ -90,11 +92,12 @@ export default {
       }
     },
     async follow() {
+     
       try {
-        await AuthenticationService.follow(
-          this._id,
-        ).then((response) => {
-          console.log("this is response", this.$store.state.user._id);
+        
+        await AuthenticationService.follow(this.$store.state.user._id, this._id
+     ).then((response) => {
+          console.log("this is response", response);
           this.$toast.success(response.data.message, {
             position: "top",
           });
@@ -105,13 +108,37 @@ export default {
         });
         // console.log(this.id);
       } catch (error) {
-        this.$toast.error(error.response.data.error, {
+        this.$toast.error(error.response.data.message, {
           position: "top",
         });
-        console.log(error);
+        console.log(error.response.data);
+      }
+    },
+     async follow() {
+     
+      try {
+        
+        await AuthenticationService.follow(this.$store.state.user._id, this._id
+     ).then((response) => {
+          console.log("this is response", response);
+          this.$toast.success(response.data.message, {
+            position: "top",
+          });
+          // this.$router.push({
+          //   name: "Home",
+          // });
+          //  this.getPost();
+        });
+        // console.log(this.id);
+      } catch (error) {
+        this.$toast.error(error.response.data.message, {
+          position: "top",
+        });
+        console.log(error.response.data);
       }
     },
   },
+  
   async mounted() {
     // this.getReviews();
     this.getuser();
