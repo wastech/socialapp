@@ -26,7 +26,8 @@ router.get("/user/:id", requireLogin, (req, res) => {
 
 router.get("/me", requireLogin, (req, res) => {
   User.findById({ _id: req.user._id })
-    .populate("post")
+    .populate("post ")
+    .populate("followers", "_id name pic")
     .select("-password")
     .exec(function (err, user) {
       if (err)

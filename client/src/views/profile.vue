@@ -25,7 +25,7 @@
 
       <div class="col-sm-12 col-md-4 col-lg-2 col-xl-3">
         <userInfo :post="post" />
-        <userFriend />
+        <userFriend :follows="follows" />
       </div>
     </div>
 
@@ -59,6 +59,7 @@
 </template>
 
 <script>
+import AuthenticationService from "@/services/AuthenticationService";
 import postService from "@/services/postService";
 import userPost from "@/components/userPost.vue";
 import userInfo from "@/components/userInfo.vue";
@@ -70,6 +71,8 @@ export default {
     return {
       post: {},
       items: [],
+      followers: [],
+      follows:[]
     };
   },
   methods: {
@@ -80,7 +83,21 @@ export default {
           this.post_length = response.data;
           this.followers = response.data.followers.length;
           this.following = response.data.following.length;
+         this.follows=response.data.followers
+         console.log("this . follow", this.follows)
         });
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async friends() {
+      try {
+        await AuthenticationService.friends(this.$store.state.user._id).then(
+          (response) => {
+            this.followers = response.data;
+            console.log("followers", response.data);
+          }
+        );
       } catch (err) {
         console.log(err);
       }
@@ -89,7 +106,6 @@ export default {
       try {
         await postService.mypost().then((response) => {
           this.items = response.data.mypost;
-          console.log(this.items);
         });
       } catch (err) {
         console.log(err);

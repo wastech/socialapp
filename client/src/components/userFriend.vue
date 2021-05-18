@@ -6,13 +6,13 @@
     <div class="row">
       <div
         class="col-sm-12 col-md-6 col-lg-6 col-xl-4"
-        v-for="item in items"
+        v-for="item in follows"
         :key="item.id"
       >
         <div class="">
-          <img :src="item.image"  alt="..." />
+          <img :src="item.pic"  alt="..." />
           <div class="body">
-            <h5 class="-title">{{ item.title }}</h5>
+            <h5 class="-title">{{ item.name }}</h5>
           </div>
         </div>
       </div>
@@ -21,30 +21,10 @@
 </template>
 <script>
 export default {
+  props:["follows"],
   data() {
     return {
-      items: [
-        {
-          image:
-            "https://static.remove.bg/remove-bg-web/2a274ebbb5879d870a69caae33d94388a88e0e35/assets/start-0e837dcc57769db2306d8d659f53555feb500b3c5d456879b9c843d1872e7baa.jpg",
-          title: "aremu",
-        },
-        {
-          image:
-            "https://static.remove.bg/remove-bg-web/2a274ebbb5879d870a69caae33d94388a88e0e35/assets/start-0e837dcc57769db2306d8d659f53555feb500b3c5d456879b9c843d1872e7baa.jpg",
-          title: "google",
-        },
-        {
-          image:
-            "https://static.remove.bg/remove-bg-web/2a274ebbb5879d870a69caae33d94388a88e0e35/assets/start-0e837dcc57769db2306d8d659f53555feb500b3c5d456879b9c843d1872e7baa.jpg",
-          title: "awesome",
-        },
-        {
-          image:
-            "https://static.remove.bg/remove-bg-web/2a274ebbb5879d870a69caae33d94388a88e0e35/assets/start-0e837dcc57769db2306d8d659f53555feb500b3c5d456879b9c843d1872e7baa.jpg",
-          title: "goog ssssssssss",
-        },
-      ],
+      
     };
   },
 };

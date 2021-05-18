@@ -15,9 +15,9 @@ router.get("/allpost", requireLogin, async (req, res) => {
       .populate("postedBy", "_id name pic nationality city")
       .populate("comments.postedBy", "_id name")
       .sort("-createdAt")
-      .skip((page - 1) * pagination) // in the first page the value of the skip is 0
+      .skip((page - 1) * pagination)
       .limit(pagination);
-    // output just 9 items
+    
     res.json({
       count: count,
       current_page: page,
@@ -35,7 +35,6 @@ router.get("/allpost", requireLogin, async (req, res) => {
 });
 
 router.get("/getsubpost", requireLogin, (req, res) => {
-  // if postedBy in following
   Post.find({ postedBy: { $in: req.user.following } })
     .populate("postedBy", "_id name")
     .populate("comments.postedBy", "_id name")
@@ -46,6 +45,22 @@ router.get("/getsubpost", requireLogin, (req, res) => {
     .catch((err) => {
       console.log(err);
     });
+});
+
+
+router.put("/:id/like", async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    if (!post.likes.includes(req.body.userId)) {
+      await post.updateOne({ $push: { likes: req.body.userId } });
+      res.status(200).json("The post has been liked");
+    } else {
+      await post.updateOne({ $pull: { likes: req.body.userId } });
+      res.status(200).json("The post has been disliked");
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 router.post(
@@ -147,7 +162,7 @@ router.put("/comment", requireLogin, (req, res) => {
       $push: { comments: comment },
     },
     {
-      // upsert: true,
+     
       new: true,
     }
   )

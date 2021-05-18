@@ -34,6 +34,7 @@
             type="button"
             class="btn btn-primary btn-sm"
             @click="follow()"
+            :class="{ display: followed }"
           >
             Follow =+
           </button>
@@ -86,6 +87,7 @@ export default {
       items: [],
       followers: [],
       cnt: "",
+      display:false
     };
   },
   methods: {
@@ -103,7 +105,7 @@ export default {
     async friends() {
       try {
         await AuthenticationService.friends(this._id).then((response) => {
-         this.followers =response.data
+          this.followers = response.data;
           console.log("followers", response.data);
         });
       } catch (err) {
@@ -123,7 +125,10 @@ export default {
           // this.$router.push({
           //   name: "Home",
           // });
+
           this.getuser();
+          this.friends();
+          this.display=true
         });
         // console.log(this.id);
       } catch (error) {
@@ -147,6 +152,7 @@ export default {
           //   name: "Home",
           // });
           this.getuser();
+          this.friends();
         });
         // console.log(this.id);
       } catch (error) {
@@ -220,5 +226,8 @@ h6 {
 p {
   text-align: justify;
   margin-top: 1em;
+}
+.display{
+  display: none;
 }
 </style>
