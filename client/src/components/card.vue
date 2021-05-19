@@ -28,7 +28,7 @@
                   <h5 class="">{{ item.postedBy.name }}</h5>
                 </router-link>
                 <p class="name">
-                  {{ item.postedBy.nationality }} {{ item.postedBy.city }}
+                  {{ item.postedBy.nationality }}, {{ item.postedBy.city }}
                 </p>
               </div>
             </div>

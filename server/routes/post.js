@@ -48,8 +48,6 @@ router.get("/getsubpost", requireLogin, (req, res) => {
 });
 
 router.put("/:id/like", async (req, res) => {
-  console.log("req.params.id", req.params.id);
-  console.log("req.body.userId", req.body.userId);
   try {
     const post = await Post.findById(req.params.id);
     if (!post.likes.includes(req.body.userId)) {

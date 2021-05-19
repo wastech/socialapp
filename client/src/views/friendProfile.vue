@@ -34,7 +34,7 @@
             type="button"
             class="btn btn-primary btn-sm"
             @click="follow()"
-            :disabled="disableButton"
+            v-if="!Following"
           >
             Follow =+
           </button>
@@ -42,6 +42,7 @@
             type="button"
             class="btn btn-primary btn-sm"
             @click="unfollow()"
+            v-else-if="Following"
           >
             Unfollow -
           </button>
@@ -87,8 +88,7 @@ export default {
       items: [],
       followers: [],
       cnt: "",
-      disableButton:false
-    
+      Following:Boolean
     };
   },
   methods: {
@@ -98,6 +98,7 @@ export default {
           this.item = response.data.user;
           this.items = response.data.posts;
           this.cnt = response.data.posts.length;
+          console.log("this.item", this.item);
         });
       } catch (err) {
         console.log(err);
@@ -119,17 +120,18 @@ export default {
           this.$store.state.user._id,
           this._id
         ).then((response) => {
+          this.Following = true
           console.log("this is response", response);
           this.$toast.success(response.data.message, {
             position: "top",
           });
+
           // this.$router.push({
           //   name: "Home",
           // });
 
           this.getuser();
           this.friends();
-            disableButton=true
         });
         // console.log(this.id);
       } catch (error) {
@@ -149,9 +151,11 @@ export default {
           this.$toast.success(response.data, {
             position: "top",
           });
+          this.Following = false
           // this.$router.push({
           //   name: "Home",
           // });
+
           this.getuser();
           this.friends();
         });
@@ -165,7 +169,7 @@ export default {
     },
   },
 
-   mounted() {
+  mounted() {
     // this.getReviews();
     this.getuser();
     this.friends();
@@ -228,7 +232,7 @@ p {
   text-align: justify;
   margin-top: 1em;
 }
-.display{
+.display {
   display: none;
 }
 </style>

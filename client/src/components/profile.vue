@@ -4,7 +4,13 @@
       <img :src="post.pic" alt="" />
     </div>
     <div class="name">
-      <h2>{{ post.name }}</h2>
+      <router-link
+        v-bind:to="{
+          name: 'profile',
+        }"
+      >
+        <h2>{{ post.name }}</h2>
+      </router-link>
     </div>
     <div class="profession">
       <h6>software developer</h6>
@@ -149,7 +155,7 @@ export default {
 
 <style scoped>
 .main {
-  margin-top: 9.7em;
+  margin-top: 3em;
   position: stick;
 }
 img {
@@ -192,6 +198,10 @@ h3 {
   font-weight: 900;
   font-size: x-large;
   text-transform: capitalize;
+}
+a {
+  color: #000;
+  text-decoration: none;
 }
 .btn1 {
   background: #833ab4; /* fallback for old browsers */
