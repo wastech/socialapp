@@ -38,7 +38,7 @@ router.get("/me", requireLogin, (req, res) => {
     });
 });
 
-router.put("/:id/follow",  async (req, res) => {
+router.put("/:id/follow", async (req, res) => {
   if (req.body.userId !== req.params.id) {
     try {
       const user = await User.findById(req.params.id);
@@ -115,8 +115,9 @@ router.put("/updatepic", uploader.single("pic"), requireLogin, (req, res) => {
 });
 
 router.post("/search-users", (req, res) => {
-  let userPattern = new RegExp("^", req.body.email);
-  User.find({ email: { $regex: userPattern } })
+  let userPattern = new RegExp(req.query.email, "i");
+  console.log("userPattern", userPattern);
+  User.find({ email: userPattern })
     .select("_id email")
     .then((user) => {
       res.json({ user });

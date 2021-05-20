@@ -48,7 +48,6 @@
 <script>
 // @ is an alias to /src
 import Api from "@/services/Api";
-//import postService from "@/services/postService";
 import profile from "@/components/profile.vue";
 import card from "@/components/card.vue";
 
@@ -97,7 +96,7 @@ export default {
       }
     },
   },
-   mounted() {
+  async mounted() {
     this.getPosts();
   },
 };

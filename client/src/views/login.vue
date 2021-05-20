@@ -75,11 +75,13 @@ export default {
         });
         this.$store.dispatch("setToken", response.data.token);
         this.$store.dispatch("setUser", response.data.user);
-
-        this.$router.push({
-          name: "Home",
-        });
-        // this.$router.replace(this.$route.query.from);
+        if (this.$route.query.from) {
+          return this.$router.replace(this.$route.query.from);
+        } else {
+          this.$router.push({
+            name: "Home",
+          });
+        }
         this.$toast.success(response.data.message, {
           position: "top",
         });
