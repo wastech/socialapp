@@ -83,7 +83,6 @@ export default {
         this.$toast.success(response.data.message, {
           position: "top",
         });
-        console.log("date", response.data.user.name);
       } catch (error) {
         this.$toast.error(error.response.data.error, {
           position: "top",

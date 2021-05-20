@@ -21,9 +21,10 @@
               {{ item.body }}
             </p>
             <div class="icons">
-              <i class="fas fa-heart" @click="like()" v-if="item.likes">
-                <span class="badge ">{{ item.likes.length }}</span></i
+              <i class="fas fa-heart"  :class="{ liked : item.likes }" @click="like()" v-if="item.likes"
+                ><span class="badge ">{{ item.likes.length }}</span></i
               >
+
               <i class="fas fa-comment" v-if="item.comments"
                 ><span class="badge ">{{ item.comments.length }}</span></i
               >
@@ -97,6 +98,7 @@ export default {
       item: {},
       text: "",
       comments: [],
+      liked: Boolean,
     };
   },
   methods: {
@@ -120,6 +122,7 @@ export default {
               position: "top",
             });
             this.getPost();
+            this.liked = true;
           });
       } catch (error) {
         this.$toast.error(error.response.data.message, {
@@ -156,6 +159,9 @@ export default {
 };
 </script>
 <style scoped>
+.liked {
+  color: red;
+}
 .img {
   width: 100%;
   height: 80vh;

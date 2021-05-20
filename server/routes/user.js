@@ -93,7 +93,6 @@ router.get("/friends/:userId", async (req, res) => {
       friendList.push({ _id, name, pic });
     });
     res.status(200).json(friendList);
-    console.log("this is friendList", friendList);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -117,7 +116,6 @@ router.put("/updatepic", uploader.single("pic"), requireLogin, (req, res) => {
 
 router.post("/search-users", (req, res) => {
   let userPattern = new RegExp("^", req.body.email);
-  console.log("userPattern", userPattern);
   User.find({ email: { $regex: userPattern } })
     .select("_id email")
     .then((user) => {

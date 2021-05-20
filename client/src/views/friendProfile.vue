@@ -36,7 +36,7 @@
             @click="follow()"
             v-if="!Following"
           >
-            Follow =+
+            Follow +
           </button>
           <button
             type="button"
@@ -60,8 +60,6 @@
               </h5>
               <p>
                 {{ item.bio }}
-                {{ $store.state.user._id }}
-                {{ $route.params.id }}
               </p>
             </div>
           </div>
@@ -88,7 +86,7 @@ export default {
       items: [],
       followers: [],
       cnt: "",
-      Following:Boolean
+      Following: Boolean,
     };
   },
   methods: {
@@ -116,11 +114,12 @@ export default {
     },
     async follow() {
       try {
+        this.Following = true;
         await AuthenticationService.follow(
           this.$store.state.user._id,
           this._id
         ).then((response) => {
-          this.Following = true
+          this.Following = true;
           console.log("this is response", response);
           this.$toast.success(response.data.message, {
             position: "top",
@@ -143,6 +142,7 @@ export default {
     },
     async unfollow() {
       try {
+        this.Following = false;
         await AuthenticationService.unfollow(
           this.$store.state.user._id,
           this._id
@@ -151,7 +151,7 @@ export default {
           this.$toast.success(response.data, {
             position: "top",
           });
-          this.Following = false
+
           // this.$router.push({
           //   name: "Home",
           // });

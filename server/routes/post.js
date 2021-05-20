@@ -155,6 +155,9 @@ router.put("/comment", requireLogin, (req, res) => {
     text: req.body.text,
     postedBy: req.user._id,
   };
+  if (!text) {
+    return res.status(422).json({ error: "Plase add the  field" });
+  }
   Post.findByIdAndUpdate(
     req.body.id,
     {
