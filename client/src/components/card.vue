@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row mt-5">
       <div
-        class="col-sm-12 col-md-6 col-lg-6 col-xl-4 mb-4"
+        class="col-sm-12  col-xs-12 col-md-6 col-lg-6 col-xl-4 mb-4"
         v-for="item in items"
         :key="item._id"
       >

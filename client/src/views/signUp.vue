@@ -98,7 +98,7 @@
 
           <div class="d-grid gap-2 col-6 mx-auto">
             <button class="btn btn-success" type="button">
-              Log in
+              <a href="/login"> Log in </a>
             </button>
           </div>
         </form>
@@ -113,7 +113,6 @@ export default {
     return {
       name: "",
       email: "",
-
       password: "",
       nationality: "",
       bio: "",
@@ -194,5 +193,9 @@ p {
 }
 .d-grid {
   margin-top: 1em;
+}
+a {
+  color: #fff;
+  text-decoration: none;
 }
 </style>

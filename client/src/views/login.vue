@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    
     <div class="row ">
       <div class=" col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
         <div class="about">
@@ -47,7 +46,9 @@
 
           <div class="d-grid gap-2 col-6 mx-auto">
             <button class="btn btn-success" type="button">
+              <a href="/signup">
               Create a New Account
+              </a>
             </button>
           </div>
         </form>
@@ -132,5 +133,9 @@ p {
 }
 .row {
   margin-top: 5em;
+}
+a {
+  color: #fff;
+  text-decoration: none;
 }
 </style>
