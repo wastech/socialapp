@@ -20,7 +20,8 @@
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog">
+      <div class="modal-dialog" >
+        
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">search for users</h5>
@@ -36,7 +37,7 @@
               <input
                 class="form-control me-2"
                 type="search"
-                v-model="email"
+                v-model.trim="email"
                 placeholder="Search"
                 aria-label="Search"
               />
@@ -56,9 +57,14 @@
                   params: { id: item._id },
                 }"
               >
-                <h6 aria-label="Close">{{ item.email }}</h6>
+                <h6>
+                  {{ item.email }}
+                </h6>
               </router-link>
             </section>
+            <div class="history__nohistory" v-if="items.length === 0">
+              <h6>No search user found</h6>
+            </div>
           </div>
         </div>
       </div>
@@ -70,7 +76,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      email: this.$route.query.email,
+      email: "",
       items: [],
     };
   },
@@ -79,32 +85,16 @@ export default {
       return !this.email;
     },
   },
-  created() {
-    if (this.email != null) {
-      this.search();
-    }
-  },
-  watch: {
-    "$route.query.email": {
-      handler: function(newVal, oldVal) {
-        if (newVal != oldVal) {
-          this.email = this.$route.query.email;
-          this.search();
-        }
-      },
-      immediate: true,
-    },
-  },
+
   methods: {
     search: function() {
       axios
-        .post("http://localhost:5000/search-users", {
-          params: {
-            email: this.email,
-          },
-        })
+        .get(
+          `http://localhost:5000/search-users/${String(
+            this.email
+          ).toLowerCase()}`
+        )
         .then((response) => {
-          this.$router.push({ query: { email: this.email } });
           this.items = response.data.user;
 
           console.log("this is search", this.items);
@@ -113,6 +103,9 @@ export default {
         .catch((error) => {
           return error;
         });
+    },
+    clear() {
+      this.email = "";
     },
   },
 };

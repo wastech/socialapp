@@ -11,7 +11,7 @@ router.get("/allpost", requireLogin, async (req, res) => {
     let pagination = 9;
     const page = req.query.page ? parseInt(req.query.page) : 1;
     const count = await Post.find({}).countDocuments();
-    let posts = await Post.find({}) // TODO: Paginate
+    let posts = await Post.find({})
       .populate("postedBy", "_id name pic nationality city")
       .populate("comments.postedBy", "_id name")
       .sort("-createdAt")
@@ -151,13 +151,16 @@ router.put("/unlike", requireLogin, (req, res) => {
 });
 
 router.put("/comment", requireLogin, (req, res) => {
+  const { text } = req.body;
+  
+  if (!text ){
+    return res.status(422).json({ error: "Plase add the field" });
+  }
   const comment = {
     text: req.body.text,
     postedBy: req.user._id,
   };
-  if (!text) {
-    return res.status(422).json({ error: "Plase add the  field" });
-  }
+
   Post.findByIdAndUpdate(
     req.body.id,
     {

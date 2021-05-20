@@ -144,13 +144,14 @@ export default {
           });
           this.getPost();
         });
-        console.log(response.data);
+       
       } catch (error) {
         this.$toast.error(error.response.data.error, {
           position: "top",
         });
         console.log(error);
       }
+      this.text =""
     },
   },
   async mounted() {

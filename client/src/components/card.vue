@@ -39,24 +39,19 @@
               params: { id: item._id },
             }"
           >
-            <img
-              :src="item.photo"
-              loading="lazy"
-              class="card-img-top"
-              alt="..."
-            />
+            <img :src="item.photo" class="card-img-top" alt="..." />
             <div class="icons">
-              <i class="fas fa-heart"></i>
-              <i class="fas fa-comment"></i>
+              <i class="fas fa-heart" v-if="item.likes">
+                <span class="badge "> {{ item.likes.length }}</span></i
+              >
+              <i class="fas fa-comment" v-if="item.likes"
+                ><span class="badge "> {{ item.comments.length }}</span></i
+              >
               <i class="fab fa-telegram-plane"></i>
             </div>
             <div class="card-body">
-              <span class="card-title" v-if="item.like"
-                >liked by
-                <b>{{ item.liked.length }}and {{ item.total }} others</b>
-              </span>
               <blockquote class="card-text">
-                <q> {{ item.body }}</q>
+                <q> {{ item.body }} </q>
                 <br />
                 <small class="text-muted">{{
                   moment(item.createdAt).fromNow()
@@ -144,11 +139,20 @@ q {
   font-weight: 700;
   font-size: medium;
 }
+.fa-heart{
+  color: tomato;
+}
 .card-body {
   margin-top: -13px;
 }
 a {
   color: #000;
   text-decoration: none;
+}
+.badge {
+  color: #000;
+}
+.fa-comment{
+  color: #000;
 }
 </style>

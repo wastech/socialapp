@@ -107,24 +107,35 @@ router.put("/updatepic", uploader.single("pic"), requireLogin, (req, res) => {
     { new: true },
     (err, result) => {
       if (err) {
-        return res.status(422).json({ error: "pic canot post" });
+        return res.status(422).json({ error: "pic can not post" });
       }
       res.json({ message: "updated successfully", result });
     }
   );
 });
 
-router.post("/search-users", (req, res) => {
-  let userPattern = new RegExp(req.query.email, "i");
-  console.log("userPattern", userPattern);
-  User.find({ email: userPattern })
-    .select("_id email")
-    .then((user) => {
-      res.json({ user });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+// router.get("/search-users", (req, res) => {
+//   let userPattern = new RegExp(req.query.email, "i");
+//   console.log("userPattern", userPattern);
+//   User.find({ email: userPattern })
+//     .select("_id email")
+//     .then((user) => {
+//       res.json({ user });
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// });
+
+router.get("/search-users/:email", (req, res, next) => {
+  const { email } = req.params;
+  User.find({ email: email }, (error, user) => {
+    if (!error) {
+      res.status(200).json({ user });
+    } else {
+      res.status(500).send(error);
+    }
+  });
 });
 
 module.exports = router;
