@@ -21,7 +21,11 @@
               {{ item.body }}
             </p>
             <div class="icons">
-              <i class="fas fa-heart"  :class="{ liked : item.likes }" @click="like()" v-if="item.likes"
+              <i
+                class="fas fa-heart"
+                :class="{ liked: item.likes }"
+                @click="like()"
+                v-if="item.likes"
                 ><span class="badge ">{{ item.likes.length }}</span></i
               >
 
@@ -31,25 +35,34 @@
               <i class="fab fa-telegram-plane"></i>
             </div>
             <section>
+              <h4 v-if="!comments.length" class="mt-4">
+                Not Commented Yet
+              </h4>
               <div class="scrollable">
                 <!-- comment box-->
+
                 <div
-                  class="row g-0 bg-light position-relative"
+                  class=" bg-light d-flex position-relative"
                   v-for="comment in comments"
                   :key="comment.id"
                 >
-                  <div class="col-md-2 mb-md-0 p-md-4">
+                  <div class="">
                     <img
                       :src="comment.postedBy.pic"
-                      class="commentuser"
+                      class="commentuser flex-shrink-0 me-3"
                       alt="..."
                     />
                   </div>
-                  <div class="col-md-6 p-2 ps-md-0">
-                    <h2 class="mt-0">{{ comment.postedBy.name }}</h2>
-                    <p>
-                      {{ comment.text }}
-                    </p>
+                  <div class="">
+                    <h2 class="mt-0 comment__name">
+                      {{ comment.postedBy.name }}
+                    </h2>
+                    <div>
+                      <p class="comment__text">
+                        {{ comment.text }}
+                      </p>
+                    </div>
+
                     <small class="card-footer text-muted">
                       1 minute ago
                     </small>
@@ -144,14 +157,13 @@ export default {
           });
           this.getPost();
         });
-       
       } catch (error) {
         this.$toast.error(error.response.data.error, {
           position: "top",
         });
         console.log(error);
       }
-      this.text =""
+      this.text = "";
     },
   },
   async mounted() {
@@ -236,13 +248,89 @@ h2 {
   font-size: 1.5em;
   color: #d8e3e7;
 }
-.fa-heart{
+.fa-heart {
   color: tomato;
 }
-.fa-comment{
+.fa-comment {
   color: #000;
 }
 .badge {
   color: black;
+}
+@media only screen and (max-width: 576px) {
+  .container {
+    width: 100%;
+  }
+  .img {
+    width: 100%;
+    height: 30vh;
+    object-fit: cover;
+  }
+  .comment__text {
+    max-width: 70%;
+
+    margin-top: 0.3em;
+    text-align: justify;
+  }
+  .scrollable {
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: justify;
+    height: 100%;
+    margin-top: 1.5em;
+  }
+
+  .fas,
+  .fab {
+    font-size: 1em;
+    color: #d8e3e7;
+  }
+  .fa-heart {
+    color: tomato;
+  }
+  .fa-comment {
+    color: #000;
+  }
+  .comment__name {
+    font-size: small;
+
+    margin-top: 3em;
+  }
+  .bg-light {
+    margin-bottom: 1em;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .img {
+    width: 100%;
+    height: 30vh;
+    object-fit: cover;
+  }
+  .scrollable {
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: justify;
+    height: 100%;
+    margin-top: 1.5em;
+  }
+  .bg-light {
+    margin-bottom: 1em;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .img {
+  width: 100%;
+  height: 63vh;
+  object-fit: cover;
+}
+.scrollable {
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align: justify;
+  height: 40vh;
+}
+.container{
+  margin-top: 4em;
+}
 }
 </style>
