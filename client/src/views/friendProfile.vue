@@ -24,11 +24,11 @@
     <!-- Button trigger modal -->
 
     <div class="row ">
-      <div class="  col-sm-12 col-md-8 col-lg-10 col-xl-9">
+      <div class="  col-sm-12 col-md-8 col-lg-9 col-xl-9">
         <friendPost :items="items" />
       </div>
 
-      <div class="col-sm-12 col-md-4 col-lg-2 col-xl-3">
+      <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
         <div class="main">
           <button
             type="button"
@@ -234,5 +234,40 @@ p {
 }
 .display {
   display: none;
+}
+@media only screen and (max-width: 576px) {
+  .container {
+    max-width: 100%;
+  }
+  .bg {
+    background-image: url("https://static.remove.bg/remove-bg-web/2a274ebbb5879d870a69caae33d94388a88e0e35/assets/start-0e837dcc57769db2306d8d659f53555feb500b3c5d456879b9c843d1872e7baa.jpg");
+    height: 150px;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  img {
+    width: 150px;
+    height: 150px;
+    margin-top: 5em;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .d-flex {
+    max-width: 100%;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+  }
+  .title{
+    margin-top: 1em;
+    font-weight: 700;
+  }
+  .main {
+  margin-top: 2em;
+}
+}
+@media only screen and (min-width: 768px) {
+}
+@media only screen and (min-width: 992px) {
 }
 </style>
