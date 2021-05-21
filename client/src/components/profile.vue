@@ -46,9 +46,6 @@
       </p>
     </div>
 
-    <section>
-      <story />
-    </section>
     <!-- Button trigger modal -->
     <div class="b">
       <button
@@ -112,15 +109,12 @@
   </div>
 </template>
 <script>
-import story from "@/components/story";
-import { mapState } from "vuex";
 import postService from "@/services/postService";
 import modal from "@/components/modal";
 import CreatePost from "./createPost.vue";
 
 export default {
   components: {
-    story,
     modal,
     CreatePost,
   },
@@ -226,4 +220,17 @@ a {
   outline: none;
   border: none;
 }
+@media only screen and (max-width: 576px) {
+  .b {
+  margin-bottom: 1em;
+  text-align: center;
+}
+}
+@media only screen and (min-width: 768px) {
+  
+}
+@media only screen and (min-width: 992px) {
+  
+}
+
 </style>
