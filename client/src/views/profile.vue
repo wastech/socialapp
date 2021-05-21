@@ -84,7 +84,6 @@ export default {
           this.followers = response.data.followers.length;
           this.following = response.data.following.length;
           this.follows = response.data.followers;
-          console.log("this . follow", this.follows);
         });
       } catch (err) {
         console.log(err);
@@ -95,7 +94,6 @@ export default {
         await AuthenticationService.friends(this.$store.state.user._id).then(
           (response) => {
             this.followers = response.data;
-            console.log("followers", response.data);
           }
         );
       } catch (err) {
@@ -181,9 +179,9 @@ h6 {
     object-fit: cover;
   }
   .b {
-  text-align: center;
-  margin-top: 8em;
-}
+    text-align: center;
+    margin-top: 8em;
+  }
 }
 @media only screen and (min-width: 768px) {
 }
