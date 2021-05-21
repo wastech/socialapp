@@ -155,4 +155,16 @@ a {
 .fa-comment{
   color: #000;
 }
+@media only screen and (max-width: 576px) {
+  .container{
+    width: 100%;
+  }
+ 
+}
+@media only screen and (min-width: 768px) {
+  
+}
+@media only screen and (min-width: 992px) {
+  
+}
 </style>

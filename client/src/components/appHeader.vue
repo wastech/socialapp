@@ -20,8 +20,7 @@
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog" >
-        
+      <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">search for users</h5>
@@ -132,4 +131,27 @@ h6 {
   font-weight: 700;
   font-size: x-medium;
 }
+@media only screen and (max-width: 576px) {
+  .__instagram {
+    margin-top: 1em;
+    font-weight: 700;
+    font-size: large;
+  }
+  small {
+    margin-left: 1em;
+  }
+  .searchBar {
+    margin-top: 1em;
+    padding: 10px 40px 10px 3px;
+    background-color: #f4f9f9;
+    font-size: large;
+    border-radius: 5px;
+  }
+  h6 {
+    margin-top: 1em;
+    font-weight: 700;
+    font-size: x-medium;
+  }
+}
+
 </style>

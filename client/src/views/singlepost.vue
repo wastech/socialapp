@@ -236,6 +236,12 @@ h2 {
   font-size: 1.5em;
   color: #d8e3e7;
 }
+.fa-heart{
+  color: tomato;
+}
+.fa-comment{
+  color: #000;
+}
 .badge {
   color: black;
 }
