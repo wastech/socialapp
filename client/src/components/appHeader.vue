@@ -61,7 +61,7 @@
                 </h6>
               </router-link>
             </section>
-            <div class="history__nohistory" v-if="items.length === 0">
+            <div class="history__nohistory" v-if="!items.length">
               <h6>No search user found</h6>
             </div>
           </div>
@@ -88,11 +88,7 @@ export default {
   methods: {
     search: function() {
       axios
-        .get(
-          `http://localhost:5000/search-users/${String(
-            this.email
-          ).toLowerCase()}`
-        )
+        .get(`search-users/${String(this.email).toLowerCase()}`)
         .then((response) => {
           this.items = response.data.user;
 
@@ -153,5 +149,4 @@ h6 {
     font-size: x-medium;
   }
 }
-
 </style>

@@ -138,6 +138,10 @@ small {
 q {
   font-weight: 700;
   font-size: medium;
+   overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 .fa-heart{
   color: tomato;

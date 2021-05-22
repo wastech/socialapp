@@ -96,7 +96,6 @@ export default {
           this.item = response.data.user;
           this.items = response.data.posts;
           this.cnt = response.data.posts.length;
-          console.log("this.item", this.item);
         });
       } catch (err) {
         console.log(err);
@@ -106,7 +105,6 @@ export default {
       try {
         await AuthenticationService.friends(this._id).then((response) => {
           this.followers = response.data;
-          console.log("followers", response.data);
         });
       } catch (err) {
         console.log(err);
@@ -137,7 +135,6 @@ export default {
         this.$toast.error(error.response.data.message, {
           position: "top",
         });
-        console.log(error.response.data);
       }
     },
     async unfollow() {
@@ -147,7 +144,6 @@ export default {
           this.$store.state.user._id,
           this._id
         ).then((response) => {
-          console.log("this is response", response);
           this.$toast.success(response.data, {
             position: "top",
           });
@@ -258,13 +254,13 @@ p {
     margin-top: 1em;
     margin-bottom: 0.5em;
   }
-  .title{
+  .title {
     margin-top: 1em;
     font-weight: 700;
   }
   .main {
-  margin-top: 2em;
-}
+    margin-top: 2em;
+  }
 }
 @media only screen and (min-width: 768px) {
 }

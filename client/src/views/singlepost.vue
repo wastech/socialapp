@@ -209,7 +209,7 @@ h2 {
   overflow-x: hidden;
   overflow-y: auto;
   text-align: justify;
-  height: 40vh;
+  height: 50vh;
 }
 .commentuser {
   width: 50px;
@@ -303,7 +303,7 @@ h2 {
 @media only screen and (min-width: 768px) {
   .img {
     width: 100%;
-    height: 30vh;
+    height: 60vh;
     object-fit: cover;
   }
   .scrollable {

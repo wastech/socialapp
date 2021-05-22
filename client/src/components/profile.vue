@@ -112,11 +112,13 @@
 import postService from "@/services/postService";
 import modal from "@/components/modal";
 import CreatePost from "./createPost.vue";
+import loader from "@/components/loader.vue";
 
 export default {
   components: {
     modal,
     CreatePost,
+    loader,
   },
   data() {
     return {
@@ -124,6 +126,7 @@ export default {
       post_length: "",
       followers: "",
       following: "",
+      loading: true,
     };
   },
 
@@ -135,9 +138,11 @@ export default {
           this.post_length = response.data;
           this.followers = response.data.followers.length;
           this.following = response.data.followings.length;
+          this.loading = false;
         });
       } catch (err) {
         console.log(err);
+        this.loading = false;
       }
     },
   },
@@ -222,15 +227,12 @@ a {
 }
 @media only screen and (max-width: 576px) {
   .b {
-  margin-bottom: 1em;
-  text-align: center;
-}
+    margin-bottom: 1em;
+    text-align: center;
+  }
 }
 @media only screen and (min-width: 768px) {
-  
 }
 @media only screen and (min-width: 992px) {
-  
 }
-
 </style>

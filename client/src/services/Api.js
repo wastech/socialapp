@@ -3,7 +3,7 @@ import store from "@/store/index";
 
 export default () => {
   return axios.create({
-    baseURL: process.env.VUE_APP_ROOT_URL,
+    baseURL: "/",
     headers: {
       Authorization: `Bearer ${store.state.token}`,
     },

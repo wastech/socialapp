@@ -26,12 +26,25 @@ mongoose.connection.on("error", (err) => {
 });
 // Sanitize data
 app.use(mongoSanitize());
-
-// Set security headers
-app.use(helmet());
+//app.use(helmet.contentSecurityPolicy());
+app.use(helmet.dnsPrefetchControl());
+app.use(helmet.expectCt());
+app.use(helmet.frameguard());
+app.use(helmet.hidePoweredBy({ setTo: "version 1 is awesome" }));
+app.use(helmet.hsts());
+app.use(helmet.ieNoOpen());
+app.use(helmet.noSniff());
+app.use(helmet.permittedCrossDomainPolicies());
+app.use(helmet.referrerPolicy());
+app.use(helmet.xssFilter());
 
 // Prevent XSS attacks
 app.use(xss());
+var corsOptions = {
+  origin: "http://localhost:8080",
+};
+
+
 
 // Prevent http param pollution
 app.use(hpp());
@@ -39,28 +52,20 @@ app.use(hpp());
 require("./models/user");
 require("./models/post");
 
+app.use(cors(corsOptions));
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
 app.use(bodyParser.json());
-app.use(cors());
 
-if (process.env.NODE_ENV === "development") {
-  app.use(morgan("dev"));
+ if (process.env.NODE_ENV === "development") {
+app.use(morgan("dev"));
 }
 
 app.use(require("./routes/auth"));
 app.use(require("./routes/post"));
 app.use(require("./routes/user"));
-
-if (process.env.NODE_ENV == "production") {
-  app.use(express.static("client/build"));
-  const path = require("path");
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  });
-}
 
 // handle & forward request errors
 if (process.env.NODE_ENV === "development") {
@@ -87,7 +92,7 @@ if (process.env.NODE_ENV === "production") {
 
   // handle & forward reqest errors
   app.use((error, req, res, next) => {
-    res.status(err.statusCode || 500).json({
+    res.status(error.statusCode || 500).json({
       status: error.status,
       message: error.message,
     });

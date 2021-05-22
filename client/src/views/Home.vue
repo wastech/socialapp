@@ -1,5 +1,9 @@
 <template>
   <div class="container">
+    <div class="home__results__notfound" v-if="!items.length">
+      <h1>Opps, No results found!!</h1>
+      >
+    </div>
     <loader v-if="loading" />
     <div class="home">
       <div class="row ">
@@ -124,13 +128,11 @@ export default {
 }
 @media only screen and (max-width: 576px) {
   .container {
-  max-width: 100%;
-}
+    max-width: 100%;
+  }
 }
 @media only screen and (min-width: 768px) {
-  
 }
 @media only screen and (min-width: 992px) {
-  
 }
 </style>
