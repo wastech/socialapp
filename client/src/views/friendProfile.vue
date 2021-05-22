@@ -15,7 +15,7 @@
           <h6>followers</h6>
         </div>
         <div>
-          <h5 v-if="item.following">{{ item.followings.length }}</h5>
+          <h5 v-if="item.followings">{{ item.followings.length }}</h5>
           <h6>following</h6>
         </div>
       </div>
@@ -30,22 +30,24 @@
 
       <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
         <div class="main">
-          <button
-            type="button"
-            class="btn btn-primary btn-sm"
-            @click="follow()"
-            v-if="!Following"
-          >
-            Follow +
-          </button>
-          <button
-            type="button"
-            class="btn btn-primary btn-sm"
-            @click="unfollow()"
-            v-else-if="Following"
-          >
-            Unfollow -
-          </button>
+          <div v-if="$route.params.id != $store.state.user._id">
+            <button
+              type="button"
+              class="btn btn-primary btn-sm"
+              @click="follow()"
+              v-if="!Following"
+            >
+              Follow +
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary btn-sm"
+              @click="unfollow()"
+              v-else-if="Following"
+            >
+              Unfollow -
+            </button>
+          </div>
           <div class="title">
             <h2 class="H2">user information</h2>
             <div class="info">
@@ -127,7 +129,7 @@ export default {
           this._id
         ).then((response) => {
           this.Following = true;
-          console.log("this is response", response);
+
           this.$toast.success(response.data.message, {
             position: "top",
           });
@@ -157,10 +159,6 @@ export default {
             position: "top",
           });
 
-          // this.$router.push({
-          //   name: "Home",
-          // });
-
           this.getuser();
           this.friends();
         });
@@ -169,7 +167,6 @@ export default {
         this.$toast.error(error.response.data.message, {
           position: "top",
         });
-        console.log(error.response.data);
       }
     },
   },

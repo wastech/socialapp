@@ -3,7 +3,11 @@
     <div class="d-flex justify-content-between">
       <div class="__instagram">
         <div class="">
-          <i class="fab fa-instagram"></i> <small>Wastech</small>
+          <i class="fab fa-instagram"></i>
+
+          <small>
+            <a href="/">{{ $store.state.user.name }}</a>
+          </small>
         </div>
       </div>
       <div class="searchBar">
@@ -36,12 +40,12 @@
               <input
                 class="form-control me-2"
                 type="search"
-                v-model.trim="email"
-                placeholder="Search"
+                v-model.trim="name"
+                placeholder=" search for username e.g wastech"
                 aria-label="Search"
               />
               <button
-                class="btn btn-outline-success"
+                class="btn btn-success"
                 :disabled="isDisabled"
                 type="submit"
               >
@@ -57,7 +61,7 @@
                 }"
               >
                 <h6>
-                  {{ item.email }}
+                  {{ item.name }}
                 </h6>
               </router-link>
             </section>
@@ -75,20 +79,20 @@ import axios from "axios";
 export default {
   data() {
     return {
-      email: "",
+      name: "",
       items: [],
     };
   },
   computed: {
     isDisabled: function() {
-      return !this.email;
+      return !this.name;
     },
   },
 
   methods: {
     search: function() {
       axios
-        .get(`search-users/${String(this.email).toLowerCase()}`)
+        .get(`search-users/${String(this.name).toLowerCase()}`)
         .then((response) => {
           this.items = response.data.user;
 
@@ -114,6 +118,10 @@ export default {
 }
 small {
   margin-left: 0.5em;
+}
+a {
+  color: #000;
+  text-decoration: none;
 }
 .searchBar {
   margin-top: 2em;

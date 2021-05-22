@@ -1,6 +1,6 @@
 <template>
   <div class="container mt-2">
-    <div class="card mb-3">
+    <div class="card1 mb-3">
       <div class="row g-0">
         <div class="col-md-12 col-xl-4 col-lg-6 col-sm-7 col-xs-12">
           <img :src="item.photo" alt="..." class="img" />
@@ -130,7 +130,6 @@ export default {
         await postService
           .like(this._id, this.$store.state.user._id)
           .then((response) => {
-            console.log("this is response", response);
             this.$toast.success(response.data.message, {
               position: "top",
             });
@@ -151,7 +150,6 @@ export default {
 
       try {
         await postService.addcomment(comment).then((response) => {
-          console.log("this is response", response);
           this.$toast.success(response.data.message, {
             position: "top",
           });
@@ -180,9 +178,9 @@ export default {
   height: 80vh;
   object-fit: cover;
 }
-.card {
+.card1 {
   -webkit-box-shadow: 0px 10px 16px -8px rgba(0, 0, 0, 0.68);
-  max-width: 80%;
+  max-width: 100%;
   width: 100%;
   text-align: justify;
   box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
@@ -261,6 +259,14 @@ h2 {
   .container {
     width: 100%;
   }
+  .card1 {
+  -webkit-box-shadow: 0px 10px 16px -8px rgba(0, 0, 0, 0.68);
+  max-width: 100%;
+  width: 100%;
+  text-align: justify;
+  box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  margin: 0 auto;
+}
   .img {
     width: 100%;
     height: 30vh;
@@ -306,6 +312,14 @@ h2 {
     height: 60vh;
     object-fit: cover;
   }
+  .card1 {
+  -webkit-box-shadow: 0px 10px 16px -8px rgba(0, 0, 0, 0.68);
+  max-width: 100%;
+  width: 100%;
+  text-align: justify;
+  box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  margin: 0 auto;
+}
   .scrollable {
     overflow-x: hidden;
     overflow-y: auto;
@@ -323,6 +337,14 @@ h2 {
     height: 80vh;
     object-fit: cover;
   }
+  .card1 {
+  -webkit-box-shadow: 0px 10px 16px -8px rgba(0, 0, 0, 0.68);
+  max-width: 100%;
+  width: 100%;
+  text-align: justify;
+  box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  margin: 0 auto;
+}
   .scrollable {
     overflow-x: hidden;
     overflow-y: auto;
