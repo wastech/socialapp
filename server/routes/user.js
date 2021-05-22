@@ -127,9 +127,9 @@ router.put("/updatepic", uploader.single("pic"), requireLogin, (req, res) => {
 //     });
 // });
 
-router.get("/search-users/:email", (req, res, next) => {
-  const { email } = req.params;
-  User.find({ email: email }, (error, user) => {
+router.get("/search-users/:name", (req, res, next) => {
+  const { name } = req.params;
+  User.find({ name: name }, (error, user) => {
     if (!error) {
       res.status(200).json({ user });
     } else {
