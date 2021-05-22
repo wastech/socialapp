@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.5567593964940a7985e363cee59a3534.js"
+  "/precache-manifest.cf2ee581150ee37dcd52db09b918db1c.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "chatting-app"});

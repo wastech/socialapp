@@ -105,7 +105,7 @@ router.get("/mypost", requireLogin, (req, res) => {
 
 router.get("/post/:id", requireLogin, (req, res) => {
   Post.findById({ _id: req.params.id })
-    .populate("postedBy", "_id name pic")
+    .populate("postedBy", "_id name pic nationality city")
     .populate("comments.postedBy", "_id name pic")
     .then((post) => {
       res.json({ post });
@@ -152,8 +152,8 @@ router.put("/unlike", requireLogin, (req, res) => {
 
 router.put("/comment", requireLogin, (req, res) => {
   const { text } = req.body;
-  
-  if (!text ){
+
+  if (!text) {
     return res.status(422).json({ error: "Plase add the field" });
   }
   const comment = {

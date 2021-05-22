@@ -15,6 +15,9 @@
               />
               <div>
                 <h2 class="mt-0">{{ item.postedBy.name }}</h2>
+                <small class="name">
+                  {{ item.postedBy.nationality }}, {{ item.postedBy.city }}
+                </small>
               </div>
             </div>
             <p>
@@ -178,6 +181,10 @@ export default {
   height: 80vh;
   object-fit: cover;
 }
+.name {
+  font-weight: 700;
+  font-size: x-medium;
+}
 .card1 {
   -webkit-box-shadow: 0px 10px 16px -8px rgba(0, 0, 0, 0.68);
   max-width: 100%;
@@ -260,13 +267,13 @@ h2 {
     width: 100%;
   }
   .card1 {
-  -webkit-box-shadow: 0px 10px 16px -8px rgba(0, 0, 0, 0.68);
-  max-width: 100%;
-  width: 100%;
-  text-align: justify;
-  box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
-  margin: 0 auto;
-}
+    -webkit-box-shadow: 0px 10px 16px -8px rgba(0, 0, 0, 0.68);
+    max-width: 100%;
+    width: 100%;
+    text-align: justify;
+    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+    margin: 0 auto;
+  }
   .img {
     width: 100%;
     height: 30vh;
@@ -313,13 +320,13 @@ h2 {
     object-fit: cover;
   }
   .card1 {
-  -webkit-box-shadow: 0px 10px 16px -8px rgba(0, 0, 0, 0.68);
-  max-width: 100%;
-  width: 100%;
-  text-align: justify;
-  box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
-  margin: 0 auto;
-}
+    -webkit-box-shadow: 0px 10px 16px -8px rgba(0, 0, 0, 0.68);
+    max-width: 100%;
+    width: 100%;
+    text-align: justify;
+    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+    margin: 0 auto;
+  }
   .scrollable {
     overflow-x: hidden;
     overflow-y: auto;
@@ -338,13 +345,13 @@ h2 {
     object-fit: cover;
   }
   .card1 {
-  -webkit-box-shadow: 0px 10px 16px -8px rgba(0, 0, 0, 0.68);
-  max-width: 100%;
-  width: 100%;
-  text-align: justify;
-  box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
-  margin: 0 auto;
-}
+    -webkit-box-shadow: 0px 10px 16px -8px rgba(0, 0, 0, 0.68);
+    max-width: 100%;
+    width: 100%;
+    text-align: justify;
+    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+    margin: 0 auto;
+  }
   .scrollable {
     overflow-x: hidden;
     overflow-y: auto;
