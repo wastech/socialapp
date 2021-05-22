@@ -61,10 +61,21 @@
 <script>
 import AuthenticationService from "@/services/AuthenticationService";
 import postService from "@/services/postService";
-import userPost from "@/components/userPost.vue";
-import userInfo from "@/components/userInfo.vue";
-import userFriend from "@/components/userFriend.vue";
-import createPost from "@/components/createPost.vue";
+import { defineAsyncComponent } from "vue";
+// Async component without options
+const userPost = defineAsyncComponent(() =>
+  import("@/components/userPost.vue")
+);
+
+const userInfo = defineAsyncComponent(() =>
+  import("@/components/userInfo.vue")
+);
+const userFriend = defineAsyncComponent(() =>
+  import("@/components/userFriend.vue")
+);
+const createPost = defineAsyncComponent(() =>
+  import("@/components/createPost.vue")
+);
 export default {
   components: { userPost, userInfo, userFriend, createPost },
   data() {

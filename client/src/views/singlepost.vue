@@ -319,18 +319,18 @@ h2 {
 }
 @media only screen and (min-width: 992px) {
   .img {
-  width: 100%;
-  height: 63vh;
-  object-fit: cover;
-}
-.scrollable {
-  overflow-x: hidden;
-  overflow-y: auto;
-  text-align: justify;
-  height: 40vh;
-}
-.container{
-  margin-top: 4em;
-}
+    width: 100%;
+    height: 80vh;
+    object-fit: cover;
+  }
+  .scrollable {
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: justify;
+    height: 50vh;
+  }
+  .container {
+    margin-top: 4em;
+  }
 }
 </style>

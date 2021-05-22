@@ -1,9 +1,5 @@
 <template>
   <div class="container">
-    <div class="home__results__notfound" v-if="!items.length">
-      <h1>Opps, No results found!!</h1>
-      >
-    </div>
     <loader v-if="loading" />
     <div class="home">
       <div class="row ">
@@ -61,10 +57,13 @@
 
 <script>
 // @ is an alias to /src
+import { defineAsyncComponent } from "vue";
+// Async component without options
+const profile = defineAsyncComponent(() => import("@/components/profile.vue")); // Async component without options
+const card = defineAsyncComponent(() => import("@/components/card.vue")); //))// Async component without options
+const loader = defineAsyncComponent(() => import("@/components/loader.vue")); //))// Async component without options
 import Api from "@/services/Api";
-import profile from "@/components/profile.vue";
-import card from "@/components/card.vue";
-import loader from "@/components/loader.vue";
+
 
 export default {
   name: "Home",
@@ -108,6 +107,7 @@ export default {
             this.items = response.data.posts;
             this.totalGrades = response.data.count;
             this.loading = false;
+            this.error = false;
           });
       } catch (err) {
         console.log(err);

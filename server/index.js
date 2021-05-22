@@ -41,10 +41,8 @@ app.use(helmet.xssFilter());
 // Prevent XSS attacks
 app.use(xss());
 var corsOptions = {
-  origin: "http://localhost:8080",
+  origin: process.env.LOCAL_URL,
 };
-
-
 
 // Prevent http param pollution
 app.use(hpp());
@@ -59,8 +57,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
- if (process.env.NODE_ENV === "development") {
-app.use(morgan("dev"));
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
 }
 
 app.use(require("./routes/auth"));

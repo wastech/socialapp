@@ -17,18 +17,21 @@ const routes = [
     meta: {
       requiresAuth: true,
     },
-    component: () => import("../views/profile.vue"),
+    component: () =>
+      import(/* webpackChunkName: "profile" */ "../views/profile.vue"),
   },
 
   {
     path: "/signup",
     name: "signup",
-    component: () => import("../views/signUp.vue"),
+    component: () =>
+      import(/* webpackChunkName: "signup" */ "../views/signUp.vue"),
   },
   {
     path: "/login",
     name: "login",
-    component: () => import("../views/login.vue"),
+    component: () =>
+      import(/* webpackChunkName: "login" */ "../views/login.vue"),
   },
   {
     path: "/p/:id",
@@ -36,7 +39,10 @@ const routes = [
     meta: {
       requiresAuth: true,
     },
-    component: () => import("../views/friendProfile.vue"),
+    component: () =>
+      import(
+        /* webpackChunkName: "friendprofile" */ "../views/friendProfile.vue"
+      ),
   },
   {
     path: "/singlepost/:id",
@@ -44,7 +50,8 @@ const routes = [
     meta: {
       requiresAuth: true,
     },
-    component: () => import("../views/singlepost.vue"),
+    component: () =>
+      import(/* webpackChunkName: "singlepost" */ "../views/singlepost.vue"),
   },
 ];
 

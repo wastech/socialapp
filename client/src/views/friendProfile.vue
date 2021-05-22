@@ -72,9 +72,18 @@
 
 <script>
 import AuthenticationService from "@/services/AuthenticationService";
-import friendPost from "@/components/friendPost.vue";
-import friendInfo from "@/components/friendInfo.vue";
-import friendFollower from "@/components/friendFollower.vue";
+import { defineAsyncComponent } from "vue";
+// Async component without options
+const friendPost = defineAsyncComponent(() =>
+  import("@/components/friendPost.vue")
+);
+const friendInfo = defineAsyncComponent(() =>
+  import("@/components/friendInfo.vue")
+);
+const friendFollower = defineAsyncComponent(() =>
+  import("@/components/friendFollower.vue")
+);
+
 import { mapState } from "vuex";
 
 export default {

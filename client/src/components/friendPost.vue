@@ -9,7 +9,9 @@
 </template>
 
 <script>
-import card from "@/components/card.vue";
+import { defineAsyncComponent } from "vue";
+// Async component without options
+const card = defineAsyncComponent(() => import("@/components/card.vue"));
 export default {
   props:['items'],
   components: { card },
