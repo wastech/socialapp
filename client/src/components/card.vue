@@ -10,10 +10,9 @@
           <div class="d-flex position-relative">
             <div v-if="item.postedBy">
               <img
-                :src="item.postedBy.pic"
+                v-lazy="item.postedBy.pic"
                 class="flex-shrink-0 me-3"
                 alt="..."
-                loading="lazy"
               />
             </div>
 
@@ -39,7 +38,7 @@
               params: { id: item._id },
             }"
           >
-            <img :src="item.photo" class="card-img-top" alt="..." />
+            <img v-lazy="item.photo" class="card-img-top" alt="..." />
             <div class="icons">
               <i class="fas fa-heart" v-if="item.likes">
                 <span class="badge "> {{ item.likes.length }}</span></i
@@ -138,12 +137,12 @@ small {
 q {
   font-weight: 700;
   font-size: medium;
-   overflow: hidden;
+  overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
-.fa-heart{
+.fa-heart {
   color: tomato;
 }
 .card-body {
@@ -156,8 +155,7 @@ a {
 .badge {
   color: #000;
 }
-.fa-comment{
+.fa-comment {
   color: #000;
 }
-
 </style>
