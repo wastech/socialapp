@@ -73,7 +73,7 @@
                 </div>
               </div>
               <div class="comment-box">
-                <div class="row mt-5">
+                <div class="row mt-1">
                   <div class="col-8">
                     <div class="form-floating">
                       <textarea
@@ -178,7 +178,7 @@ export default {
 }
 .img {
   width: 100%;
-  height: 80vh;
+  height: 100%;
   object-fit: cover;
 }
 .name {
@@ -189,6 +189,7 @@ export default {
   -webkit-box-shadow: 0px 10px 16px -8px rgba(0, 0, 0, 0.68);
   max-width: 100%;
   width: 100%;
+  height: 100vh;
   text-align: justify;
   box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
   margin: 0 auto;
@@ -338,10 +339,11 @@ h2 {
     margin-bottom: 1em;
   }
 }
+
 @media only screen and (min-width: 992px) {
   .img {
     width: 100%;
-    height: 80vh;
+    height: 100%;
     object-fit: cover;
   }
   .card1 {
@@ -356,7 +358,7 @@ h2 {
     overflow-x: hidden;
     overflow-y: auto;
     text-align: justify;
-    height: 50vh;
+    height: 40vh;
   }
   .container {
     margin-top: 4em;
