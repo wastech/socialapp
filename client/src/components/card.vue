@@ -10,7 +10,7 @@
           <div class="d-flex position-relative">
             <div v-if="item.postedBy">
               <img
-                v-lazy="item.postedBy.pic"
+                :src="item.postedBy.pic"
                 class="flex-shrink-0 me-3"
                 alt="..."
               />
@@ -38,7 +38,7 @@
               params: { id: item._id },
             }"
           >
-            <img v-lazy="item.photo" class="card-img-top" alt="..." />
+            <img :src="item.photo" class="card-img-top" alt="..." />
             <div class="icons">
               <i class="fas fa-heart" v-if="item.likes">
                 <span class="badge "> {{ item.likes.length }}</span></i

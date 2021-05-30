@@ -10,7 +10,7 @@ router.get("/user/:id", requireLogin, (req, res) => {
     .select("-password")
     .then((user) => {
       Post.find({ postedBy: req.params.id })
-        .populate("postedBy", "_id name pic")
+        .populate("postedBy", "_id name pic nationality city")
         .exec((err, posts) => {
           if (err) {
             return res.status(422).json({ error: err });

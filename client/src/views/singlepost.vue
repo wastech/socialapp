@@ -3,13 +3,13 @@
     <div class="card1 mb-3">
       <div class="row g-0">
         <div class="col-md-12 col-xl-4 col-lg-6 col-sm-7 col-xs-12">
-          <img v-lazy="item.photo" alt="..." class="img" />
+          <img :src="item.photo" alt="..." class="img" />
         </div>
         <div class="col-md-12 col-xl-8 col-lg-6 col-sm-12 col-xs-12">
           <div class="card-body">
             <div class="d-flex position-relative" v-if="item.postedBy">
               <img
-                v-lazy="item.postedBy.pic"
+                :src="item.postedBy.pic"
                 class="flex-shrink-0 me-3"
                 alt="..."
               />
