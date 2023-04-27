@@ -2,17 +2,17 @@
   <div class="container">
     <loader v-if="loading" />
     <div class="home">
-      <div class="row ">
-        <div class="col-sm-12 col-md-8 col-lg-8 col-xl-9 ">
+      <div class="row">
+        <div class="col-sm-12 col-md-8 col-lg-8 col-xl-9">
           <card :items="items" />
         </div>
         <div class="col-sm-12 col-md-4 col-lg-4 col-xl-3">
           <profile />
         </div>
       </div>
-      <nav aria-label="Page navigation example">
+      <nav v-if="items.length > 12" aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-          <li class="page-item " :class="{ disabled: currentPage === 1 }">
+          <li class="page-item" :class="{ disabled: currentPage === 1 }">
             <router-link
               :to="{ query: { page: currentPage - 1 } }"
               class="page-link"
@@ -63,7 +63,6 @@ const profile = defineAsyncComponent(() => import("@/components/profile.vue")); 
 const card = defineAsyncComponent(() => import("@/components/card.vue")); //))// Async component without options
 const loader = defineAsyncComponent(() => import("@/components/loader.vue")); //))// Async component without options
 import Api from "@/services/Api";
-
 
 export default {
   name: "Home",
