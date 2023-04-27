@@ -1,13 +1,13 @@
 <template>
   <div class="container">
-    <div class="row ">
-      <div class=" col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
         <div class="about">
           <h2>wastech</h2>
           <p>connect with friends and wolrd around you on wastech</p>
         </div>
       </div>
-      <div class=" col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 login-box">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 login-box">
         <form>
           <div class="mb-3 input-group-lg">
             <input
@@ -22,14 +22,14 @@
           <div class="mb-3 input-group-lg">
             <input
               type="password"
-              class="form-control "
+              class="form-control"
               v-model="password"
               id="exampleInputPassword1"
               placeholder="admin123"
             />
           </div>
 
-          <div class="d-grid gap-2 ">
+          <div class="d-grid gap-2">
             <button
               class="btn btn-primary"
               type="button"
@@ -46,9 +46,7 @@
 
           <div class="d-grid gap-2 col-6 mx-auto">
             <button class="btn btn-success" type="button">
-              <a href="/signup">
-              Create a New Account
-              </a>
+              <a href="/signup"> Create a New Account </a>
             </button>
           </div>
         </form>
@@ -77,6 +75,9 @@ export default {
         });
         this.$store.dispatch("setToken", response.data.token);
         this.$store.dispatch("setUser", response.data.user);
+        this.$toast.success(response.data.message, {
+          position: "top",
+        });
         if (this.$route.query.from) {
           return this.$router.replace(this.$route.query.from);
         } else {
@@ -84,9 +85,6 @@ export default {
             name: "Home",
           });
         }
-        this.$toast.success(response.data.message, {
-          position: "top",
-        });
       } catch (error) {
         this.$toast.error(error.response.data.error, {
           position: "top",
