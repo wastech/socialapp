@@ -6,7 +6,9 @@
           <i class="fab fa-instagram"></i>
 
           <small>
-            <a href="/">{{ $store.state.user.name }}</a>
+            <a href="/" v-if="$store.state.user">{{
+              $store.state.user.name
+            }}</a>
           </small>
         </div>
       </div>
@@ -84,19 +86,17 @@ export default {
     };
   },
   computed: {
-    isDisabled: function() {
+    isDisabled: function () {
       return !this.name;
     },
   },
 
   methods: {
-    search: function() {
+    search: function () {
       axios
         .get(`search-users/${String(this.name).toLowerCase()}`)
         .then((response) => {
           this.items = response.data.user;
-
-          console.log("this is search", this.items);
         })
 
         .catch((error) => {
