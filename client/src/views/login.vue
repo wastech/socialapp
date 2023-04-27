@@ -16,7 +16,7 @@
               id="exampleInputEmail1"
               v-model="email"
               aria-describedby="emailHelp"
-              placeholder="email"
+              placeholder="use: admin123@gmail.com or register"
             />
           </div>
           <div class="mb-3 input-group-lg">
@@ -25,7 +25,7 @@
               class="form-control "
               v-model="password"
               id="exampleInputPassword1"
-              placeholder="password"
+              placeholder="admin123"
             />
           </div>
 
