@@ -1,5 +1,5 @@
 # socialapp
-SocialApp is  internet-based social media site to stay connected with friends, family, colleagues, customers, or clients
+SocialApp is a  internet-based social media site to stay connected with friends, family, colleagues, customers, or clients
 
 
 ## Home Page Interface 
