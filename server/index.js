@@ -6,9 +6,9 @@ var cors = require("cors");
 var bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const mongoSanitize = require("express-mongo-sanitize");
-// const helmet = require("helmet");
-// const xss = require("xss-clean");
-// const hpp = require("hpp");
+const helmet = require("helmet");
+const xss = require("xss-clean");
+const hpp = require("hpp");
 const { MONGOURI } = require("./config/keys");
 dotenv.config({ path: ".env" });
 
@@ -24,22 +24,22 @@ mongoose.connection.on("connected", () => {
 mongoose.connection.on("error", (err) => {
   console.log("err connecting", err);
 });
-// Sanitize data
-// app.use(mongoSanitize());
-//app.use(helmet.contentSecurityPolicy());
-// app.use(helmet.dnsPrefetchControl());
-// app.use(helmet.expectCt());
-// app.use(helmet.frameguard());
-// app.use(helmet.hidePoweredBy({ setTo: "version 1 is awesome" }));
-// app.use(helmet.hsts());
-// app.use(helmet.ieNoOpen());
-// app.use(helmet.noSniff());
-// app.use(helmet.permittedCrossDomainPolicies());
-// app.use(helmet.referrerPolicy());
-// app.use(helmet.xssFilter());
+Sanitize data
+app.use(mongoSanitize());
+app.use(helmet.contentSecurityPolicy());
+app.use(helmet.dnsPrefetchControl());
+app.use(helmet.expectCt());
+app.use(helmet.frameguard());
+app.use(helmet.hidePoweredBy({ setTo: "version 1 is awesome" }));
+app.use(helmet.hsts());
+app.use(helmet.ieNoOpen());
+app.use(helmet.noSniff());
+app.use(helmet.permittedCrossDomainPolicies());
+app.use(helmet.referrerPolicy());
+app.use(helmet.xssFilter());
 
-// Prevent XSS attacks
-// app.use(xss());
+Prevent XSS attacks
+app.use(xss());
 var corsOptions = {
   origin: process.env.LOCAL_URL,
 };
@@ -50,7 +50,7 @@ var corsOptions = {
 require("./models/user");
 require("./models/post");
 
-app.use(cors());
+app.use(cors(corsOptions));
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 
