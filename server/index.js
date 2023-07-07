@@ -25,7 +25,7 @@ mongoose.connection.on("error", (err) => {
   console.log("err connecting", err);
 });
 // Sanitize data
-app.use(mongoSanitize());
+// app.use(mongoSanitize());
 //app.use(helmet.contentSecurityPolicy());
 // app.use(helmet.dnsPrefetchControl());
 // app.use(helmet.expectCt());
@@ -50,7 +50,7 @@ var corsOptions = {
 require("./models/user");
 require("./models/post");
 
-app.use(cors(corsOptions));
+app.use(cors());
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 
